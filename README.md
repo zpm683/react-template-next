@@ -81,5 +81,5 @@
     | └─setup.ts
     ├─index.css
     ├─index.tsx
-    └─gloable.d.ts
+    └─env.d.ts
 ```
