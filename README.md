@@ -54,16 +54,11 @@
 ├─.prettierrc
 ├─.prettierignore
 ├─index.html
-├─jest.config.ts
 ├─package.json
 ├─pnpm-lock.yaml
 ├─README.md
-├─tsconfig.node.json
 ├─tsconfig.json
 ├─vite.config.ts
-├─test
-| ├─ */*.test.tsx
-| └─setupTest.ts
 └─src
     ├─app
     | ├─@types
@@ -82,7 +77,9 @@
     | ├─components
     | ├─hooks
     | └─utils
+    ├─test
+    | └─setup.ts
     ├─index.css
     ├─index.tsx
-    └─vite-env.d.ts
+    └─gloable.d.ts
 ```
