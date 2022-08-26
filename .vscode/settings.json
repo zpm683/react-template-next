@@ -1,0 +1,81 @@
+{
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "trailing",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "workbench.colorCustomizations": {
+    "editorWhitespace.foreground": "#fbff00"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "code-runner.executorMap": {
+    "typescript": "tsc $fileName && node $fileNameWithoutExt.js"
+  },
+  "todo-tree.tree.showCountsInTree": true,
+  "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "icon": "bug",
+      "foreground": "#F56C6C",
+      "type": "line"
+    },
+    "FIXME": {
+      "icon": "flame",
+      "foreground": "#FF9800",
+      "type": "line"
+    },
+    "TODO": {
+      "foreground": "#FFEB38",
+      "type": "line"
+    },
+    "NOTE": {
+      "icon": "note",
+      "foreground": "#67C23A",
+      "type": "line"
+    },
+    "REVIEW": {
+      "icon": "tag",
+      "foreground": "#409EFF",
+      "type": "line"
+    },
+    "HACK": {
+      "icon": "versions",
+      "foreground": "#E040FB",
+      "type": "line"
+    },
+    "XXX": {
+      "icon": "unverified",
+      "foreground": "#E91E63",
+      "type": "line"
+    }
+  },
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "NOTE",
+    "REVIEW",
+    "XXX"
+  ],
+  "todo-tree.general.statusBar": "total"
+}
