@@ -1,81 +1,68 @@
 {
-  "editor.formatOnSave": true,
-  "editor.renderWhitespace": "trailing",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
   },
-  "workbench.colorCustomizations": {
-    "editorWhitespace.foreground": "#fbff00"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "code-runner.executorMap": {
-    "typescript": "tsc $fileName && node $fileNameWithoutExt.js"
-  },
-  "todo-tree.tree.showCountsInTree": true,
-  "todo-tree.highlights.customHighlight": {
-    "BUG": {
-      "icon": "bug",
-      "foreground": "#F56C6C",
-      "type": "line"
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "FIXME": {
-      "icon": "flame",
-      "foreground": "#FF9800",
-      "type": "line"
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "jsxPragma": null //jsx-runtime
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime",
+    "prettier"
+  ],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "settings": {
+    "react": {
+      "version": "detect" //jsx-runtime
     },
-    "TODO": {
-      "foreground": "#FFEB38",
-      "type": "line"
-    },
-    "NOTE": {
-      "icon": "note",
-      "foreground": "#67C23A",
-      "type": "line"
-    },
-    "REVIEW": {
-      "icon": "tag",
-      "foreground": "#409EFF",
-      "type": "line"
-    },
-    "HACK": {
-      "icon": "versions",
-      "foreground": "#E040FB",
-      "type": "line"
-    },
-    "XXX": {
-      "icon": "unverified",
-      "foreground": "#E91E63",
-      "type": "line"
+    // https://stackoverflow.com/questions/41769880/how-to-manually-add-a-path-to-be-resolved-in-eslintrc
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "paths": ["./src"]
+      }
     }
   },
-  "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "NOTE",
-    "REVIEW",
-    "XXX"
-  ],
-  "todo-tree.general.statusBar": "total"
+  "rules": {
+    // http://eslint.org/docs/rules/
+    "no-plusplus": 0,
+    "no-param-reassign": 0,
+
+    // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
+    "react/react-in-jsx-scope": 0, //jsx-runtime
+    "react/jsx-uses-react": 0, //jsx-runtime
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+
+    // https://typescript-eslint.io/rules/ban-types/
+    "@typescript-eslint/ban-types": [2, { "types": { "{}": false } }],
+
+    // https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
+    "import/prefer-default-export": 0,
+    "import/no-default-export": 1,
+    "import/extensions": 0,
+
+    //https://github.com/prettier/eslint-plugin-prettier
+    "prettier/prettier": "error"
+  }
 }
