@@ -18,12 +18,16 @@
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
 - 🐙 test by [@testing-library](https://testing-library.com/)
 - 👀 lint-code by [eslint](eslint.org) & [prettier](https://prettier.io/)
+- 📊 test-coverage by [c8](https://github.com/bcoe/c8)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
 - 🗃️ package-management by [pnpm](https://pnpm.io/)
 
-### How to use? 🤨
+### About Env 🌌
+- Node version need >=16
+- You need install pnpm first!  
+  > npm i -g pnpm
 
-(you need install pnpm first!)
+### How to use? 🤨
 
   Step1：clone this project  
   Step2：pnpm i  
