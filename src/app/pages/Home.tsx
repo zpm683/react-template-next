@@ -40,9 +40,10 @@ export const Home = () => {
         }}
       >
         <Paper sx={{ height: "70vh", p: 4, display: "flex", flexFlow: "warp" }}>
-          {Avatars.map((Avatar, i) => (
-            <Avatar
-              key={i}
+          {Avatars.map((AvatarItem, index) => (
+            <AvatarItem
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
               sx={{ width: 100, height: 100 }}
               src="/img/logo.png"
             />
