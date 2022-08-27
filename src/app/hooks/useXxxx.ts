@@ -1,1 +1,1 @@
-export const useXxxx = () => void 0;
+export const useXxxx = () => undefined;
