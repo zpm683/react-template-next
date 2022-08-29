@@ -46,7 +46,7 @@
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
     // in most cases set a key by array index is ok, but need to review
-    "react/no-array-index-key":0,
+    "react/no-array-index-key":1,
     "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
     "react/function-component-definition": [
       2,
