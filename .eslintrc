@@ -55,6 +55,9 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    
+    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+    "jsx-a11y/anchor-is-valid": 0,
 
     // https://typescript-eslint.io/rules/ban-types/
     "@typescript-eslint/ban-types": [2, { "types": { "{}": false } }],
