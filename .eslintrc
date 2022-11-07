@@ -55,6 +55,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "react/require-default-props": 0,
     
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
     "jsx-a11y/anchor-is-valid": 0,
