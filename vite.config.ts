@@ -24,7 +24,11 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true,
     }),
-    eslint(),
+    eslint({
+      include: ["src/**/*.js", "src/**/*.jsx", "src/**/*.tsx", "src/**/*.ts"],
+      exclude: ["./node_modules/**"],
+      cache: false,
+    }),
   ],
   envPrefix: "REACT_APP_",
   server: {
