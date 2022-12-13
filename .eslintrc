@@ -44,6 +44,7 @@
     "react/react-in-jsx-scope": 0, //jsx-runtime
     "react/jsx-uses-react": 0, //jsx-runtime
     "react/prop-types": 0,
+    "react/no-children-prop": 0,
     "react/jsx-props-no-spreading": 0,
     // in most cases set a key by array index is ok, but need to review
     "react/no-array-index-key":1,
