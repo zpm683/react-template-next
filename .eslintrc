@@ -67,6 +67,7 @@
     "import/prefer-default-export": 0,
     "import/no-default-export": 1,
     "import/extensions": 0,
+    "import/no-unresolved": 0,
 
     //https://github.com/prettier/eslint-plugin-prettier
     "prettier/prettier": "error"
