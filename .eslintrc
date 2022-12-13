@@ -47,8 +47,7 @@
     "react/prop-types": 0,
     "react/no-children-prop": 0,
     "react/jsx-props-no-spreading": 0,
-    // in most cases set a key by array index is ok, but need to review
-    "react/no-array-index-key":1,
+    "react/no-array-index-key": 1,
     "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
     "react/function-component-definition": [
       2,
@@ -57,13 +56,10 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "react/require-default-props": 0,
-    
-    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
-    "jsx-a11y/anchor-is-valid": 0,
 
     // https://typescript-eslint.io/rules/ban-types/
     "@typescript-eslint/ban-types": [2, { "types": { "{}": false } }],
+    "@typescript-eslint/no-unused-vars": [1],
 
     // https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
     "import/prefer-default-export": 0,
