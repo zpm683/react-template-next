@@ -1,17 +1,19 @@
 {
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "trailing",
+  "eslint.alwaysShowStatus": true,
   "editor.codeActionsOnSave": {
+    "source.fixAll": true,
     "source.fixAll.eslint": true
   },
   "workbench.colorCustomizations": {
     "editorWhitespace.foreground": "#fbff00"
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -26,6 +28,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "code-runner.executorMap": {
