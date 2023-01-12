@@ -40,7 +40,8 @@
     "no-plusplus": 0,
     "no-param-reassign": 0,
     "no-restricted-syntax": 0,
-
+    "no-irregular-whitespace": 1,
+    
     // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
     "react/react-in-jsx-scope": 0, //jsx-runtime
     "react/jsx-uses-react": 0, //jsx-runtime
