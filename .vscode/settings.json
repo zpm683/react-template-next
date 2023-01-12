@@ -9,6 +9,8 @@
   "workbench.colorCustomizations": {
     "editorWhitespace.foreground": "#fbff00"
   },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
