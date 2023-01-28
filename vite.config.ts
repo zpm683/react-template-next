@@ -14,19 +14,18 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
+    eslint(),
+    {
+      ...visualizer(),
+      apply: "build",
+    },
     progress({
       format: `${colors.green(colors.bold("Building"))} ${colors.cyan(
         "[:bar]",
       )} :percent`,
     }),
-    visualizer({
-      open: true,
-      gzipSize: true,
-      brotliSize: true,
-    }),
-    eslint(),
   ],
-  envPrefix: "REACT_APP_",
+  envPrefix: "ENV_",
   server: {
     port: 3000,
     host: true,
