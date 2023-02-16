@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    eslint(),
+    eslint({ cache: true }),
     {
       ...visualizer(),
       apply: "build",
