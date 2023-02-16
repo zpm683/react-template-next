@@ -9,7 +9,7 @@
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "test": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "remove-dependencies": "rimraf node_modules"
+    "remove-node_modules": "rimraf node_modules"
   },
   "engines": {
     "node": ">=16.0.0"
