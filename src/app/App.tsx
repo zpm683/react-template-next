@@ -1,12 +1,10 @@
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { Router } from "./routers/Router";
+import { Router } from "./routers";
 
 export const App = () => (
   <CssBaseline>
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+     <RouterProvider router={router} />
   </CssBaseline>
 );
