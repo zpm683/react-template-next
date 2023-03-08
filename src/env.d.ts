@@ -1,12 +1,4 @@
-/// <reference types="node" />
-/// <reference types="react-dom" />
-
-declare namespace NodeJS {
-  interface ProcessEnv {
-    readonly NODE_ENV: "development" | "production" | "test";
-    readonly PUBLIC_URL: string;
-  }
-}
+/// <reference types="vite/client" />
 
 declare module "*.avif" {
   const src: string;
@@ -76,4 +68,3 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-
