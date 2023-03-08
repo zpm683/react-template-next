@@ -17,7 +17,7 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), ENV_PREFIX);
 
   const buildInSingleFile =
-    command === "build" && Boolean(env.ENV_BUILD_IN_SINGLEFILE);
+    command === "build" && env.ENV_BUILD_IN_SINGLEFILE === "true";
 
   buildInSingleFile && console.log("build in single file!");
 
