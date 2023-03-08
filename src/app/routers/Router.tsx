@@ -3,9 +3,10 @@ import { createHashRouter, createBrowserRouter } from "react-router-dom";
 import { APP_PATH } from "../constants";
 import { Home, PageNotFound } from "../pages";
 
-const createRouter = Boolean(import.meta.env.ENV_BUILD_IN_SINGLEFILE)
-  ? createHashRouter
-  : createBrowserRouter;
+const createRouter =
+  import.meta.env.ENV_BUILD_IN_SINGLEFILE === "true"
+    ? createHashRouter
+    : createBrowserRouter;
 
 // config the router
 export const router = createRouter([
