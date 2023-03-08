@@ -73,3 +73,7 @@ interface ImportMetaEnv {
   readonly ENV_BUILD_IN_SINGLEFILE: string;
 }
 
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
