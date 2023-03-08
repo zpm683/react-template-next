@@ -12,6 +12,7 @@ import { MyAppBar } from "app/components";
 import { useGlobalStore } from "app/stores";
 import { useMemo } from "react";
 import { makeItemsByCount } from "app/utils";
+import logo from "app/assets/img/logo.png";
 
 /**
  * Home
@@ -44,7 +45,7 @@ export const Home = () => {
             <AvatarItem
               key={index}
               sx={{ width: 100, height: 100 }}
-              src="/img/logo.png"
+              src={logo}
             />
           ))}
         </Paper>
