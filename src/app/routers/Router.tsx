@@ -1,11 +1,15 @@
-import { Route, Routes } from "react-router-dom";
+import { createHashRouter, createBrowserRouter } from "react-router-dom";
+
 import { APP_PATH } from "../constants";
 import { Home, PageNotFound } from "../pages";
 
-export const Router = () => (
-  <Routes>
-    <Route index element={<Home />} />
-    <Route path={APP_PATH.HOME} element={<Home />} />
-    <Route path="/*" element={<PageNotFound />} />
-  </Routes>
-);
+const createRouter = Boolean(import.meta.env.ENV_BUILD_IN_SINGLEFILE)
+  ? createHashRouter
+  : createBrowserRouter;
+
+// config the router
+export const router = createRouter([
+  { index: true, element: <Home /> },
+  { path: APP_PATH.HOME, element: <Home /> },
+  { path: "*", element: <PageNotFound /> },
+]);
