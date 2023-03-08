@@ -1,4 +1,4 @@
-import { createImmerStore } from "./createImmerStore";
+import { createImmerStore } from "shared/utils";
 
 interface GlobalStore {
   count: number;
