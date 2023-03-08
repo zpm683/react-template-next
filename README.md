@@ -37,6 +37,13 @@
 
   that's all, happy hacking!  
 
+### How to build all in one HTML file? 📜
+
+  just set this env in .env.production file!
+  ```
+  ENV_BUILD_IN_SINGLEFILE = true
+  ```
+
 ### Script 🪃
 - dev
 - build
