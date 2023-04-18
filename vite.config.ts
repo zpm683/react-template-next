@@ -9,6 +9,7 @@ import progress from "vite-plugin-progress";
 import eslint from "vite-plugin-eslint";
 import colors from "picocolors";
 import { viteSingleFile } from "vite-plugin-singlefile";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 const ENV_PREFIX = "ENV_";
 
@@ -36,6 +37,7 @@ export default defineConfig(({ command, mode }) => {
           "[:bar]",
         )} :percent`,
       }),
+      nodePolyfills(),
     ],
     envPrefix: ENV_PREFIX,
     server: {
