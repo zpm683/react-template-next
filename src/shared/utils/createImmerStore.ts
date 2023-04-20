@@ -8,6 +8,7 @@ type Initializer<T extends Object> = StateCreator<
   T
 >;
 
-export const createImmerStore = <T extends Object>(
-  initializer: Initializer<T>,
-) => create(immer<T>(initializer));
+const createImmerStore = <T extends Object>(initializer: Initializer<T>) =>
+  create(immer<T>(initializer));
+
+export { createImmerStore };

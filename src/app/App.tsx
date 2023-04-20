@@ -1,10 +1,13 @@
+import { FC } from "react";
 import { RouterProvider } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
+import { CssBaseline } from "@mui/material";
 
 import { router } from "./routers";
 
-export const App = () => (
+const App: FC = () => (
   <CssBaseline>
-     <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </CssBaseline>
 );
+
+export { App };

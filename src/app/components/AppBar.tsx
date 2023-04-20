@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -8,7 +10,7 @@ type MyAppBarProps = {
 /**
  * MyAppBar
  */
-export const MyAppBar: React.FC<MyAppBarProps> = ({ title = "MyAppBar" }) => (
+const MyAppBar: FC<MyAppBarProps> = ({ title = "MyAppBar" }) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
@@ -28,3 +30,5 @@ export const MyAppBar: React.FC<MyAppBarProps> = ({ title = "MyAppBar" }) => (
     </AppBar>
   </Box>
 );
+
+export { MyAppBar };

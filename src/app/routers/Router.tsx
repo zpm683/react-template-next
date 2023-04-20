@@ -9,8 +9,10 @@ const createRouter =
     : createBrowserRouter;
 
 // config the router
-export const router = createRouter([
+const router = createRouter([
   { index: true, element: <Home /> },
   { path: APP_PATH.HOME, element: <Home /> },
   { path: "*", element: <PageNotFound /> },
 ]);
+
+export { router };
