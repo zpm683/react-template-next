@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import { throttle } from "lodash";
+
 import { off, on } from "../utils";
 
 const defaultEvents = [

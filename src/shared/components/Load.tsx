@@ -1,6 +1,6 @@
-import { ReactNode, Suspense } from "react";
+import { FC, ReactNode, Suspense } from "react";
 
-const Loading = () => <div>Loading...</div>;
+const Loading: FC = () => <div>Loading...</div>;
 
 const lazyLoad = (children: ReactNode): ReactNode => (
   <Suspense fallback={<Loading />}>{children}</Suspense>

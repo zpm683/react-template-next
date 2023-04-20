@@ -1,12 +1,12 @@
 import { createImmerStore } from "shared/utils";
 
-interface GlobalStore {
+type GlobalStore = {
   count: number;
   changeCount: (type: "add" | "dec") => void;
   clearCount: () => void;
-}
+};
 
-export const useGlobalStore = createImmerStore<GlobalStore>((set) => ({
+const useGlobalStore = createImmerStore<GlobalStore>((set) => ({
   count: 0,
   changeCount: (type) =>
     set((state) => {
@@ -18,3 +18,6 @@ export const useGlobalStore = createImmerStore<GlobalStore>((set) => ({
       state.count = 0;
     }),
 }));
+
+export { useGlobalStore };
+export type { GlobalStore };

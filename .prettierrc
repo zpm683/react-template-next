@@ -14,5 +14,21 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+
+  "importOrder": [
+    "^vite$",
+    "^react",
+    "^mui$",
+    "<THIRD_PARTY_MODULES>",
+    "^app",
+    "^shared",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": true,
+  "importOrderCaseInsensitive": true
 }

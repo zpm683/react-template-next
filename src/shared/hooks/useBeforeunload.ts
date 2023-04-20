@@ -10,7 +10,7 @@ type UseBeforeunloadHandler =
  * @example
  *    useBeforeunload(e => e.preventDefault());
  */
-export const useBeforeunload = (handler?: UseBeforeunloadHandler) => {
+const useBeforeunload = (handler?: UseBeforeunloadHandler) => {
   const eventListenerRef = useRef<any>();
 
   useEffect(() => {
@@ -37,3 +37,5 @@ export const useBeforeunload = (handler?: UseBeforeunloadHandler) => {
     };
   }, []);
 };
+
+export { useBeforeunload };

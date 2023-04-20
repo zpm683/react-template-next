@@ -1,1 +1,5 @@
-export const PageNotFound = () => <div>404</div>;
+import { FC } from "react";
+
+const PageNotFound: FC = () => <div>404</div>;
+
+export { PageNotFound };
