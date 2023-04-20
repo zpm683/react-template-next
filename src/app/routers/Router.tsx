@@ -1,4 +1,4 @@
-import { createHashRouter, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createHashRouter } from "react-router-dom";
 
 import { APP_PATH } from "../constants";
 import { Home, PageNotFound } from "../pages";
