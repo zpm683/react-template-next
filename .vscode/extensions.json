@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "catppuccin.catppuccin-vsc",
+    "kamikillerto.vscode-colorize",
+    "dsznajder.es7-react-js-snippets",
+    "gruntfuggly.todo-tree",
+    "vscode-icons-team.vscode-icons",
+    "mrmlnc.vscode-json5",
+    "oderwat.indent-rainbow"
+  ]
+}
