@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { indigo, grey } from "@mui/material/colors";
 
-export const theme = createTheme({
+const theme = createTheme({
   palette: {
     default: {
       main: grey[100],
@@ -40,7 +40,7 @@ declare module "@mui/material/Button" {
   }
 }
 
-export const darkTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
@@ -48,3 +48,5 @@ export const darkTheme = createTheme({
     },
   },
 });
+
+export { theme, darkTheme };
