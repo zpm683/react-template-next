@@ -74,6 +74,7 @@
     "typescript-plugin-css-modules": "4.2.2",
     "vite": "4.1.4",
     "vite-plugin-eslint": "1.8.1",
+    "vite-plugin-node-polyfills": "0.8.1",
     "vite-plugin-progress": "0.0.6",
     "vite-plugin-singlefile": "0.13.3",
     "vite-tsconfig-paths": "4.0.5",
