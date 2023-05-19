@@ -16,7 +16,6 @@ const ENV_PREFIX = "ENV_";
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), ENV_PREFIX);
-  const base = loadEnv(mode, process.cwd()).VITE_APP_BASE_URL;
 
   const buildInSingleFile =
     command === "build" && env.ENV_BUILD_IN_SINGLEFILE === "true";
@@ -51,7 +50,7 @@ export default defineConfig(({ command, mode }) => {
       environment: "happy-dom",
       setupFiles: "./src/test/setup.ts",
     },
-    base: base,
+    base: env.ENV_APP_BASE_URL,
     build: {
       outDir: "dist",
       rollupOptions: {
