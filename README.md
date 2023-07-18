@@ -9,6 +9,7 @@
 - 🔍 type-check by [typescript](https://www.typescriptlang.org/)
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
 - 🖼️ ui-component by [@mui/material](https://mui.com/)
+- ⚛️ design-systems by [atomic design](https://atomicdesign.bradfrost.com/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
 - ⚓ component-router by [react-router](https://reactrouter.com/)
 - 💥 error-boundary by [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
