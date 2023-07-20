@@ -7,7 +7,7 @@ import { produce } from "immer";
 import qs from "qs";
 import type { IStringifyOptions } from "qs";
 
-import { getApiServerURL, getApiTimeOut } from "./envUtils";
+import { getApiServerURL, getApiTimeOut } from "./env-utils";
 
 type Result<T> = {
   success: boolean;

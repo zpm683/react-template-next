@@ -1,4 +1,4 @@
-import { isSafari } from "./envUtils";
+import { isSafari } from "./env-utils";
 
 const toString = (
   input: string | number | undefined,

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { useHandlerRef } from "./withRefFC";
+import { useHandlerRef } from "./with-ref-fc";
 
 function createSingletonFC<Handler, Props>(
   RefFC: React.ForwardRefExoticComponent<

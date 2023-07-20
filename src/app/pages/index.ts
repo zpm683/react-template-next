@@ -1,2 +1,2 @@
-export * from "./Home";
-export * from "./PageNotFound";
+export * from "./home";
+export * from "./page-not-found";

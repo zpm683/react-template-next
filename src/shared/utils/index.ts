@@ -1,4 +1,4 @@
 export * from "./functions";
-export * from "./envUtils";
-export * from "./axiosInstance";
-export * from "./createImmerStore";
+export * from "./env-utils";
+export * from "./axios-instance";
+export * from "./create-immer-store";
