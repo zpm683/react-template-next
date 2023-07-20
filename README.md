@@ -7,12 +7,15 @@
 - 🏗️ bootstrap by [vite](https://vitejs.dev/)
 - 📸 ui-framework by [react](https://beta.reactjs.org/)
 - 🔍 type-check by [typescript](https://www.typescriptlang.org/)
-- 🏭 build by tsc & vite
+- 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
 - 🖼️ ui-component by [@mui/material](https://mui.com/)
+- ⚛️ design-systems by [atomic design](https://atomicdesign.bradfrost.com/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
 - ⚓ component-router by [react-router](https://reactrouter.com/)
+- 💥 error-boundary by [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 - 🪝 react-hooks by [ahooks](https://ahooks.js.org/)
 - 📡 http-client by [axios](https://axios-http.com/)
+- 🛁 clean up css by [normalize.css](https://github.com/necolas/normalize.css/)
 - 🎭 create immutable-state by [immer](https://immerjs.github.io/immer/)
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
@@ -20,7 +23,7 @@
 - 👀 lint-code by [eslint](eslint.org) & [prettier](https://prettier.io/)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
-- 🗃️ other tools: [lodash]() & [normalize.css](https://github.com/necolas/normalize.css/) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
+- 🗃️ other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
 - Node version need >=16
@@ -29,9 +32,10 @@
 
   Step1：clone this project  
   Step2：npm i  
-  Step3：make your components in src/\*\*  
-  Step4: make your test code  in test/\*\*  
-  Step5: run scripts (dev/build/preview/test/lint)  
+  Step3：npm run dev  
+  Step4：make your components in src/\*\*  
+  Step5: make your test code  in test/\*\*  
+  Step6: run scripts (build/preview/test/lint/...)  
 
   that's all, happy hacking!  
 
@@ -94,3 +98,6 @@
     ├─index.tsx
     └─env.d.ts
 ```
+
+### Demo ⚛️
+- [react-todo-demo](https://github.com/zpm683/react-todo-demo)
