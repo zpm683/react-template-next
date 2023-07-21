@@ -16,6 +16,7 @@
 - 🪝 react-hooks by [ahooks](https://ahooks.js.org/)
 - 📡 http-client by [axios](https://axios-http.com/)
 - 🛁 clean up css by [normalize.css](https://github.com/necolas/normalize.css/)
+- 🪄 makes typescript's built-in typings be better by [ts-reset](https://github.com/total-typescript/ts-reset)
 - 🎭 create immutable-state by [immer](https://immerjs.github.io/immer/)
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
@@ -70,7 +71,6 @@
 ├─.prettierignore
 ├─index.html
 ├─package.json
-├─pnpm-lock.yaml
 ├─README.md
 ├─tsconfig.json
 ├─vite.config.ts
@@ -79,6 +79,10 @@
     | ├─@types
     | ├─apis
     | ├─components
+    | | ├─atoms
+    | | ├─molecules
+    | | ├─organisms
+    | | └─index.ts
     | ├─constants
     | ├─hooks
     | ├─pages
@@ -86,7 +90,7 @@
     | ├─stores
     | ├─theme
     | ├─utils
-    | ├─App.tsx
+    | ├─app.tsx
     | └─index.ts
     ├─shared
     | ├─components
@@ -96,6 +100,7 @@
     | └─setup.ts
     ├─index.css
     ├─index.tsx
+    ├─reset.d.ts
     └─env.d.ts
 ```
 
