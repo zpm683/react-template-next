@@ -1,45 +1,21 @@
-import { FC, useMemo } from "react";
-
-import { Avatar, Button, ButtonGroup, Container, Paper } from "@mui/material";
-import { useMemoizedFn } from "ahooks";
+import { FC } from "react";
 
 import logo from "app/assets/img/logo.png";
-import { useGlobalStore } from "app/stores";
-import { makeItemsByCount } from "app/utils";
+import { BaseLayout, Image, PrimaryButton } from "app/components";
 
 /**
  * Home
  */
 const Home: FC = () => {
-  const count = useGlobalStore((s) => s.count);
-  const changeCount = useGlobalStore((s) => s.changeCount);
-  const clearCount = useGlobalStore((s) => s.clearCount);
-
-  const handelClickAdd = useMemoizedFn(() => {
-    changeCount("add");
-  });
-
-  const handleClickDec = useMemoizedFn(() => {
-    changeCount("dec");
-  });
-
-  const Avatars = useMemo(() => makeItemsByCount(count, Avatar), [count]);
-
   return (
-    <Container>
-      <Paper
-        sx={{ p: 4, display: "flex", flexWrap: "wrap", minHeight: "40vh" }}
-      >
-        {Avatars.map((AvatarItem, index) => (
-          <AvatarItem key={index} sx={{ width: 100, height: 100 }} src={logo} />
-        ))}
-      </Paper>
-      <ButtonGroup variant="outlined" aria-label="outlined button group">
-        <Button onClick={handelClickAdd}>Add</Button>
-        <Button onClick={handleClickDec}>Dec</Button>
-        <Button onClick={clearCount}>Remove</Button>
-      </ButtonGroup>
-    </Container>
+    <BaseLayout>
+      <Image src={logo} />
+      <div>
+        <h1 className="text-6xl font-bold">Hello World!</h1>
+        <p className="py-6">This is a demo used react-template-next!!</p>
+        <PrimaryButton>Get Started</PrimaryButton>
+      </div>
+    </BaseLayout>
   );
 };
 

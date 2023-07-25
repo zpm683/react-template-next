@@ -3,3 +3,5 @@ src/**/*.test.*
 src/test
 node_modules
 vite.config.ts
+postcss.config.js
+tailwind.config.js
