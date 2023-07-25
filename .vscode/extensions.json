@@ -8,6 +8,7 @@
     "gruntfuggly.todo-tree",
     "vscode-icons-team.vscode-icons",
     "mrmlnc.vscode-json5",
-    "oderwat.indent-rainbow"
+    "oderwat.indent-rainbow",
+    "bradlc.vscode-tailwindcss"
   ]
 }
