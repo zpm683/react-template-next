@@ -10,6 +10,7 @@
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
 - 🖼️ ui-component by [@mui/material](https://mui.com/)
 - ⚛️ design-systems by [atomic design](https://atomicdesign.bradfrost.com/)
+- 📔 ui component explorer by [storybook](https://storybook.js.org/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
 - ⚓ component-router by [react-router](https://reactrouter.com/)
 - 💥 error-boundary by [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
