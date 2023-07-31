@@ -11,7 +11,7 @@ const Image = withRefFC<HTMLImageElement, ImageProps>((ref, props) => {
   return (
     <img
       ref={ref}
-      className="max-w-sm rounded-lg shadow-2xl ml-10"
+      className="ml-10 max-w-sm rounded-lg shadow-2xl"
       alt={props.src}
       {...props}
     />

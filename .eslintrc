@@ -83,6 +83,9 @@
     }
   ],
   "rules": {
+    // https://github.com/prettier/eslint-plugin-prettier#options
+    "prettier/prettier": "warn",
+
     // http://eslint.org/docs/rules/
     "array-callback-return": "warn",
     "default-case": ["warn", { "commentPattern": "^no default$" }],
