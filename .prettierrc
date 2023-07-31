@@ -15,12 +15,10 @@
   "trailingComma": "all",
   "useTabs": false,
   "endOfLine": "auto",
-
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-
   "importOrder": [
     "^vite$",
     "^react",
