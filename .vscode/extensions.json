@@ -9,6 +9,7 @@
     "vscode-icons-team.vscode-icons",
     "mrmlnc.vscode-json5",
     "oderwat.indent-rainbow",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "juanallo.vscode-dependency-cruiser"
   ]
 }

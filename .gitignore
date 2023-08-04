@@ -7,24 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# 3rd-dependencies
 node_modules
+
+# Output files
 dist
 coverage
 dist-ssr
 *.local
 stats.html
+dependencies.svg
+storybook-static
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
+# Lock files
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
