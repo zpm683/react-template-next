@@ -22,13 +22,15 @@
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
 - 🐙 test by [@testing-library](https://testing-library.com/)
-- 👀 lint-code by [eslint](eslint.org) & [prettier](https://prettier.io/)
+- 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)
+- ⛓️ dependencies checker by [madge](https://github.com/pahen/madge)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
 - 🗃️ other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
 - Node version need >=16
+- If you want to run the "output-dependencies" script, you must have [graphviz]((https://graphviz.gitlab.io/download/)) installed.
 
 ### How to use? 🤨
 
@@ -55,7 +57,12 @@
 - test
 - lint
 - coverage
+- storybook
+- build-storybook
+- check-circular
+- output-dependencies
 - remove-node_modules
+- upgrade-node_modules
 
 ### Catalog 📑
 
