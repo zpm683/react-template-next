@@ -17,6 +17,7 @@ dist-ssr
 *.local
 stats.html
 dependencies.svg
+storybook-static
 
 # Lock files
 package-lock.json
