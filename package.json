@@ -13,7 +13,7 @@
     "check-circular": "npx madge --warning --circular src",
     "output-dependencies": "npx madge --warning --image dependencies.svg src",
     "remove-node_modules": "rimraf node_modules",
-    "upgrade-node_modules": "ncu",
+    "upgrade-node_modules": "npx npm-check-updates -u",
     "prebuild": "npm run check-circular && npm run lint"
   },
   "engines": {
