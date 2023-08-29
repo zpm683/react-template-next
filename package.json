@@ -14,15 +14,11 @@
     "output-dependencies": "npx madge --image dependencies.svg src",
     "remove-node_modules": "rimraf node_modules",
     "upgrade-node_modules": "npx npm-check-updates -u",
-    "prebuild": "npm run check-circular && npm run lint"
+    "prebuild": "npm run check-circular && npm run lint",
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=16.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
