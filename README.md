@@ -1,6 +1,8 @@
 # react-template-next
 
-## Quick to build a modern react app！
+## Quick to build a modern react app with react clean architecture！
+
+![react-clean-architecture](./architecture.png)
 
 ### Features ✨
 
@@ -28,31 +30,35 @@
 - 🗃️ other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
+
 - Node version need >=16
-- If you want to run the "output-dependencies" script, you must have [graphviz]((https://graphviz.gitlab.io/download/)) installed.
+- If you want to run the "output-dependencies" script, you must have [graphviz](<(https://graphviz.gitlab.io/download/)>) installed.
 
 ### Other version 🔗
+
 - [component by MUI](https://github.com/zpm683/react-template-next/tree/mui)
 
 ### How to use? 🤨
 
-  Step1：clone this project  
-  Step2：npm i  
-  Step3：npm run dev  
-  Step4：make your components in src/\*\*  
-  Step5: make your test code  in test/\*\*  
-  Step6: run scripts (build/preview/test/lint/...)  
+Step1：clone this project  
+ Step2：npm i  
+ Step3：npm run dev  
+ Step4：make your components in src/\*\*  
+ Step5: make your test code in test/\*\*  
+ Step6: run scripts (build/preview/test/lint/...)
 
-  that's all, happy hacking!  
+that's all, happy hacking!
 
 ### How to build all in one HTML file? 📜
 
-  just set this env in .env.production file!
-  ```
-  ENV_BUILD_IN_SINGLEFILE = true
-  ```
+just set this env in .env.production file!
+
+```
+ENV_BUILD_IN_SINGLEFILE = true
+```
 
 ### Script 🪃
+
 - dev
 - build
 - preview
@@ -115,4 +121,5 @@
 ```
 
 ### Demo ⚛️
+
 - [react-todo-demo](https://github.com/zpm683/react-todo-demo)
