@@ -2,41 +2,41 @@
 
 ## Quick to build a modern react app with react clean architecture！
 
-![react-clean-architecture](./architecture.png)
-
 ### Features ✨
 
 - 🏗️ bootstrap by [vite](https://vitejs.dev/)
-- 📸 framework by [react](https://beta.reactjs.org/)
-- 🔍 type-check by [typescript](https://www.typescriptlang.org/)
+- ⚛️ framework by [react](https://beta.reactjs.org/)
+- 🧬 language by [typescript](https://www.typescriptlang.org/)
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
-- 🖼️ component by [daisyui](https://daisyui.com/) & [tailwindcss](https://tailwindcss.com/)
-- ⚛️ design-systems by [atomic design](https://atomicdesign.bradfrost.com/)
+- 🖼️ component by [mui](https://mui.com/)
+- ⚛️ design-pattern by [atomic design](https://atomicdesign.bradfrost.com/)
 - 📔 ui component explorer by [storybook](https://storybook.js.org/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
+- 📝 form by [react-hook-form](https://react-hook-form.com/) & form-validation by [zod](https://zod.dev/)
 - ⚓ page-router by [react-router](https://reactrouter.com/)
 - 💥 error-boundary by [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 - 🪝 react-hooks by [ahooks](https://ahooks.js.org/)
 - 📡 http-client by [react-query](https://tanstack.com/query/) & [axios](https://axios-http.com/)
 - 🪄 makes typescript's built-in typings be better by [ts-reset](https://github.com/total-typescript/ts-reset)
-- 🎭 create immutable-state by [immer](https://immerjs.github.io/immer/)
+- 🎏 create immutable-state by [immer](https://immerjs.github.io/immer/)
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
-- 🐙 test by [@testing-library](https://testing-library.com/)
+- 🐙 unit-test by [@testing-library](https://testing-library.com/)
+- 🎭 e2e-test by [playwright](https://playwright.dev/)
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)
-- ⛓️ dependencies checker by [madge](https://github.com/pahen/madge)
+- 🔍 dependencies checker by [madge](https://github.com/pahen/madge)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
-- 🗃️ other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
+- 🧩 other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
 
-- Node version need >=16
+- Node version need >=18
 - If you want to run the "output-dependencies" script, you must have [graphviz](<(https://graphviz.gitlab.io/download/)>) installed.
 
 ### Other version 🔗
 
-- [component by MUI](https://github.com/zpm683/react-template-next/tree/mui)
+- [css by tailwind](https://github.com/zpm683/react-template-next/tree/tailwindcss)
 
 ### How to use? 🤨
 
@@ -75,19 +75,29 @@ ENV_BUILD_IN_SINGLEFILE = true
 ### Catalog 📑
 
 ```txt
+├─.husky
+├─.storybook
 ├─.vscode
-├─dist
 ├─coverage
+├─dist
 ├─node_modules
 ├─public
-├─.eslintrc
+├─storybook-static
+├─.env.development
+├─.env.production
 ├─.eslintignore
+├─.eslintrc
 ├─.gitignore
-├─.prettierrc
+├─.madgerc
 ├─.prettierignore
+├─.prettierrc
+├─architecture.png
+├─dependencies.svg
 ├─index.html
+├─LICENSE
 ├─package.json
 ├─README.md
+├─stats.html
 ├─tsconfig.json
 ├─vite.config.ts
 └─src
@@ -101,10 +111,11 @@ ENV_BUILD_IN_SINGLEFILE = true
     | | └─index.ts
     | ├─constants
     | ├─hooks
+    | ├─layouts
     | ├─pages
     | ├─routers
     | ├─stores
-    | ├─theme
+    | ├─themes
     | ├─utils
     | ├─app.tsx
     | └─index.ts
@@ -119,6 +130,10 @@ ENV_BUILD_IN_SINGLEFILE = true
     ├─reset.d.ts
     └─env.d.ts
 ```
+
+### React-Clean-Architecture
+
+![react-clean-architecture](./architecture.png)
 
 ### Demo ⚛️
 

@@ -1,8 +1,19 @@
 import { FC } from "react";
 import { RouterProvider } from "react-router-dom";
 
-import { router } from "./routers";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
-const App: FC = () => <RouterProvider router={router} />;
+import { router } from "./routers";
+import { theme } from "./themes";
+
+const App: FC = () => {
+  return (
+    <CssBaseline>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </CssBaseline>
+  );
+};
 
 export { App };
