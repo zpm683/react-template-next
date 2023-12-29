@@ -131,7 +131,7 @@ ENV_BUILD_IN_SINGLEFILE = true
     └─env.d.ts
 ```
 
-### React-Clean-Architecture
+### About React-Clean-Architecture 🧐
 
 ![react-clean-architecture](./architecture.png)
 
