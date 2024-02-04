@@ -10,6 +10,7 @@
     "mrmlnc.vscode-json5",
     "oderwat.indent-rainbow",
     "bradlc.vscode-tailwindcss",
-    "juanallo.vscode-dependency-cruiser"
+    "juanallo.vscode-dependency-cruiser",
+    "aykutsarac.jsoncrack-vscode",
   ]
 }
