@@ -1,3 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import { isSafari } from "./env-utils";
 
 const toString = (
@@ -17,6 +30,30 @@ const toBool = (input: string | number | undefined): boolean => {
 
 const toNumber = (input: string | undefined): number =>
   input ? Number(input) : 0;
+
+function on<T extends Window | Document | HTMLElement | EventTarget>(
+  obj: T | null,
+  ...args: Parameters<T["addEventListener"]> | [string, Function | null, ...any]
+): void {
+  if (obj && obj.addEventListener) {
+    obj.addEventListener(
+      ...(args as Parameters<HTMLElement["addEventListener"]>),
+    );
+  }
+}
+
+function off<T extends Window | Document | HTMLElement | EventTarget>(
+  obj: T | null,
+  ...args:
+    | Parameters<T["removeEventListener"]>
+    | [string, Function | null, ...any]
+): void {
+  if (obj && obj.removeEventListener) {
+    obj.removeEventListener(
+      ...(args as Parameters<HTMLElement["removeEventListener"]>),
+    );
+  }
+}
 
 /**
  * wait some time in async function
@@ -222,6 +259,8 @@ export {
   toString,
   toBool,
   toNumber,
+  on,
+  off,
   buildCsvUrl,
   saveAs,
   copyToClipboard,

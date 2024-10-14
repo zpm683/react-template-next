@@ -11,7 +11,7 @@ type UseBeforeunloadHandler =
  *    useBeforeunload(e => e.preventDefault());
  */
 const useBeforeunload = (handler?: UseBeforeunloadHandler) => {
-  const eventListenerRef = useRef<any>();
+  const eventListenerRef = useRef<(event: BeforeUnloadEvent) => void>();
 
   useEffect(() => {
     eventListenerRef.current = (event: BeforeUnloadEvent) => {
@@ -29,7 +29,7 @@ const useBeforeunload = (handler?: UseBeforeunloadHandler) => {
 
   useEffect(() => {
     const eventListener = (event: BeforeUnloadEvent) => {
-      eventListenerRef.current(event);
+      eventListenerRef.current?.(event);
     };
     window.addEventListener("beforeunload", eventListener);
     return () => {

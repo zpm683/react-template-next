@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { throttle } from "lodash-es";
+import { throttle } from "es-toolkit";
 
 import { off, on } from "../utils";
 
@@ -23,7 +23,8 @@ const useIdle = (
 
   useEffect(() => {
     let mounted = true;
-    let timeout: any;
+    // eslint-disable-next-line no-undef
+    let timeout: NodeJS.Timeout;
     let localState: boolean = state;
     const set = (newState: boolean) => {
       if (mounted) {

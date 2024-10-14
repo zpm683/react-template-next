@@ -221,6 +221,7 @@ export default tseslint.config(
         jsxPragma: null, //jsx-runtime
       },
       globals: {
+        React: true,
         ...globals.browser,
       },
     },

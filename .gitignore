@@ -16,6 +16,7 @@ coverage
 dist-ssr
 *.local
 storybook-static
+stats.html
 
 # Lock files
 package-lock.json
