@@ -36,7 +36,7 @@ export const useDoms = () => {
     if (!ref.current) {
       ref.current = new Map();
     }
-    return ref.current as DomMap;
+    return ref.current;
   });
 
   const setDom = (id: MapKey) => (node: HTMLElement | null) => {

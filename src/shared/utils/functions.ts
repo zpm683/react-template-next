@@ -18,30 +18,6 @@ const toBool = (input: string | number | undefined): boolean => {
 const toNumber = (input: string | undefined): number =>
   input ? Number(input) : 0;
 
-function on<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args: Parameters<T["addEventListener"]> | [string, Function | null, ...any]
-): void {
-  if (obj && obj.addEventListener) {
-    obj.addEventListener(
-      ...(args as Parameters<HTMLElement["addEventListener"]>),
-    );
-  }
-}
-
-function off<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args:
-    | Parameters<T["removeEventListener"]>
-    | [string, Function | null, ...any]
-): void {
-  if (obj && obj.removeEventListener) {
-    obj.removeEventListener(
-      ...(args as Parameters<HTMLElement["removeEventListener"]>),
-    );
-  }
-}
-
 /**
  * wait some time in async function
  * @param ms
@@ -90,7 +66,7 @@ const copyToClipboard = (textToCopy: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(textToCopy);
   } else {
-    let textArea = document.createElement("textarea");
+    const textArea = document.createElement("textarea");
     textArea.value = textToCopy;
     textArea.style.position = "absolute";
     textArea.style.opacity = "0";
@@ -246,8 +222,6 @@ export {
   toString,
   toBool,
   toNumber,
-  on,
-  off,
   buildCsvUrl,
   saveAs,
   copyToClipboard,

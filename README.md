@@ -27,7 +27,7 @@
 - 🔍 dependencies checker by [madge](https://github.com/pahen/madge)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
-- 🧩 other tools: [lodash](https://github.com/lodash/lodash) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
+- 🧩 other tools:[json-server](https://github.com/typicode/json-server) [es-toolkit](https://github.com/toss/es-toolkit/tree/main) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
 
@@ -76,6 +76,9 @@ ENV_BUILD_IN_SINGLEFILE = true
 
 ```txt
 ├─.husky
+├─.mock
+    ├─config.json
+    └─data.json
 ├─.storybook
 ├─.vscode
 ├─coverage
@@ -85,14 +88,13 @@ ENV_BUILD_IN_SINGLEFILE = true
 ├─storybook-static
 ├─.env.development
 ├─.env.production
-├─.eslintignore
-├─.eslintrc
 ├─.gitignore
 ├─.madgerc
 ├─.prettierignore
 ├─.prettierrc
 ├─architecture.png
 ├─dependencies.svg
+├─.eslint.config.js
 ├─index.html
 ├─LICENSE
 ├─package.json
@@ -117,6 +119,7 @@ ENV_BUILD_IN_SINGLEFILE = true
     | ├─stores
     | ├─themes
     | ├─utils
+    | ├─error.tsx
     | ├─app.tsx
     | └─index.ts
     ├─shared

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios from "axios";
 import type {
   AxiosRequestConfig,

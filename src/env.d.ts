@@ -62,7 +62,9 @@ declare module "*.module.sass" {
 }
 
 interface ImportMetaEnv {
-  readonly ENV_BUILD_IN_SINGLEFILE: string;
+  readonly ENV_API_URL: string;
+  readonly ENV_API_TIME_OUT: number;
+  readonly ENV_APP_BASE_URL: string;
 }
 
 interface ImportMeta {

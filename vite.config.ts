@@ -3,10 +3,8 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import colors from "picocolors";
 import { visualizer } from "rollup-plugin-visualizer";
-import eslint from "vite-plugin-eslint";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import progress from "vite-plugin-progress";
-import { viteSingleFile } from "vite-plugin-singlefile";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const ENV_PREFIX = "ENV_";
@@ -15,17 +13,10 @@ const ENV_PREFIX = "ENV_";
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), ENV_PREFIX);
 
-  const buildInSingleFile =
-    command === "build" && env.ENV_BUILD_IN_SINGLEFILE === "true";
-
-  buildInSingleFile && console.log("build in single file!");
-
   return {
     plugins: [
       react(),
       tsconfigPaths(),
-      eslint({ cache: true }),
-      buildInSingleFile && viteSingleFile({ removeViteModuleLoader: true }),
       {
         ...visualizer(),
         apply: "build",
@@ -43,6 +34,19 @@ export default defineConfig(({ command, mode }) => {
       port: 3000,
       host: true,
       cors: true,
+      // proxy: {
+      //   "/api": {
+      //     target: "http://localhost:8080",
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, ""),
+      //     configure: (proxy, options) => {
+      //       proxy.on("proxyReq", (proxyReq, req, res) => {
+      //         proxyReq.removeHeader("Referer");
+      //         proxyReq.removeHeader("origin");
+      //       });
+      //     },
+      //   },
+      // },
     },
     test: {
       globals: true,
@@ -53,16 +57,14 @@ export default defineConfig(({ command, mode }) => {
     build: {
       outDir: "dist",
       rollupOptions: {
-        output: buildInSingleFile
-          ? {}
-          : {
-              manualChunks: {
-                react: ["react", "react-dom", "react-router-dom"],
-              },
-              chunkFileNames: "assets/js/[name]-[hash].js",
-              entryFileNames: "assets/js/[name]-[hash].js",
-              assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
-            },
+        output: {
+          manualChunks: {
+            react: ["react", "react-dom", "react-router-dom"],
+          },
+          chunkFileNames: "assets/js/[name]-[hash].js",
+          entryFileNames: "assets/js/[name]-[hash].js",
+          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+        },
       },
     },
   };
