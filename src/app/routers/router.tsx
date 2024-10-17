@@ -1,25 +1,25 @@
-import { createBrowserRouter, createHashRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { getBaseURL } from "shared/utils";
+import { Auth } from "app/layout";
 
 import { APP_PATH } from "../constants";
 import { Home, PageNotFound } from "../pages";
 
-const createRouter =
-  import.meta.env.ENV_BUILD_IN_SINGLEFILE === "true"
-    ? createHashRouter
-    : createBrowserRouter;
+const Router = () => {
+  return (
+    <Routes>
+      {/* public routes */}
+      {/* <Route path={APP_PATH.LOGIN} element={<Login />} /> */}
 
-// config the router
-const router = createRouter(
-  [
-    { index: true, element: <Home /> },
-    { path: APP_PATH.HOME, element: <Home /> },
-    { path: "*", element: <PageNotFound /> },
-  ],
-  {
-    basename: getBaseURL(),
-  },
-);
+      {/* private routes */}
+      <Route element={<Auth />}>
+        <Route index path={APP_PATH.ROOT} element={<Home />} />
+        <Route index path={APP_PATH.HOME} element={<Home />} />
+      </Route>
 
-export { router };
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  );
+};
+
+export { Router };

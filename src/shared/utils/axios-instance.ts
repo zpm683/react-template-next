@@ -12,12 +12,13 @@ import type { IStringifyOptions } from "qs";
 
 import { getApiServerURL, getApiTimeOut } from "./env-utils";
 
-type Result<T> = {
-  success: boolean;
-  code: number;
-  msg: string;
-  data: T;
-};
+// type Result<T> = {
+//   success: boolean;
+//   code: number;
+//   msg: string;
+//   data: T;
+// };
+type Result<T> = T;
 
 type RequestConfig = AxiosRequestConfig & {
   /**

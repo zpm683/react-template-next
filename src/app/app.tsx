@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { RouterProvider } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { Error } from "./error";
-import { router } from "./routers";
+import { Router } from "./routers";
 import { theme } from "./themes";
 
 const App: FC = () => {
@@ -12,7 +12,9 @@ const App: FC = () => {
     <Error>
       <CssBaseline>
         <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
         </ThemeProvider>
       </CssBaseline>
     </Error>

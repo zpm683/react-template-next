@@ -2,6 +2,7 @@ import { createContext, useContext, useRef } from "react";
 
 function createSingletonFC<Handler, Props>(
   RefFC: React.ForwardRefExoticComponent<
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     React.RefAttributes<Handler> & React.PropsWithoutRef<Props | {}>
   >,
 ) {
