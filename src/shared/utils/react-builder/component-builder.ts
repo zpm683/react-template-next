@@ -1,30 +1,24 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useMemo } from "react";
 
 import { useMount, useUnmount } from "ahooks";
 import { produce } from "immer";
 import { create } from "zustand";
 
+// 回调函数参数
+type CBFnArg<S, P> = { state: S; props: P };
+type HandlerFnArg<S, P> = CBFnArg<S, P>;
+
 // 定义渲染函数参数的类型，包含状态、属性和子节点
 type RenderFnArg<S, P, H extends Record<string, any>> = {
-  state: S;
-  props: P;
   children: React.ReactNode;
   handler: { [K in keyof H]: (event: React.SyntheticEvent) => void };
-};
-type HandlerFnArg<S, P> = { state: S; props: P };
-type UseFnArg<S, P> = { state: S; props: P };
+} & CBFnArg<S, P>;
 
 // 生成器接口，定义了构建器的各种方法
-interface IReactBuilder<S, P, H extends Record<string, any>> {
+interface IComponentBuilder<S, P, H extends Record<string, any>> {
   name: string;
   state<K extends keyof S>(key: K, initialValue: S[K]): this;
   props<K extends keyof P>(key: K, defaultValue: P[K]): this;
@@ -33,39 +27,26 @@ interface IReactBuilder<S, P, H extends Record<string, any>> {
     fn: (
       arg: HandlerFnArg<S, P> & { event: React.SyntheticEvent },
     ) => void | Promise<void>,
-  ): IReactBuilder<S, P, H & Record<K, typeof fn>>;
-  mount(fn: () => void | Promise<void>): this;
-  unmount(fn: () => void | Promise<void>): this;
+  ): IComponentBuilder<S, P, H & Record<K, typeof fn>>;
+  mount(fn: (arg: CBFnArg<S, P>) => void | Promise<void>): this;
+  unmount(fn: (arg: CBFnArg<S, P>) => void | Promise<void>): this;
   ui(renderFn: (arg: RenderFnArg<S, P, H>) => React.ReactNode): this;
-  use(fn: (arg: UseFnArg<S, P>) => void): this;
-  build(): {
-    Component: React.FC<P & { children?: React.ReactNode }>;
-    getState: <K extends keyof S>(key: K) => S[K];
-    setState: <K extends keyof S>(key: K, nextState: S[K]) => void;
-    useStore: <U>(selector: (state: S) => U) => U;
-  };
+  build(): React.FC<P & { children?: React.ReactNode }>;
 }
 
-const componentInstances = new Map<string, IReactBuilder<any, any, any>>();
-
 /**
- * ReactBuilder (Happy Hacking!)
+ * ComponentBuilder (Happy Hacking!)
  * @param name component name
  * @example
  * type AppState = { name: string; age: number; tel: number };
  *type AppProps = { color?: string };
  *
- *const App = ReactBuilder<AppState, AppProps>("App")
+ *const App = ComponentBuilder<AppState, AppProps>("App")
  *  .state("name", "hahaha")
  *  .state("age", 1)
  * .props("color", "red")
  * .mount(() => {
  *   console.log("App is Mount");
- * })
- * .use(({ state }) => {
- *   useEffect(() => {
- *     console.log("age is changed");
- *   }, [state.age]);
  * })
  * .ui(({ state, props, children }) => (
  *   <div>
@@ -76,7 +57,7 @@ const componentInstances = new Map<string, IReactBuilder<any, any, any>>();
  * ))
  * .build();
  *
- *const Child = ReactBuilder("Child1")
+ *const Child = ComponentBuilder("Child1")
  *  .handler("clickBtn", ({ event, props, state }) => {
  *    console.log(event, props, state);
  *    App.setState("age", App.getState("age") + 1);
@@ -99,28 +80,23 @@ const componentInstances = new Map<string, IReactBuilder<any, any, any>>();
  *);
  *
  */
-const ReactBuilder = <
+const ComponentBuilder = <
   S extends Record<string, unknown>,
   P extends Record<string, unknown>,
   H extends Record<string, any> = {},
 >(
   name: string,
-): IReactBuilder<S, P, H> => {
-  if (componentInstances.has(name)) {
-    return componentInstances.get(name)!;
-  }
-
+): IComponentBuilder<S, P, H> => {
   const useStore = create<S>(() => ({}) as S);
   const defaultProps: Partial<P> = {};
   const handlers: Partial<H> = {};
 
-  const uses: ((arg: UseFnArg<S, P>) => void)[] = [];
-  const mountEffects: (() => void | Promise<void>)[] = [];
-  const unmountEffects: (() => void | Promise<void>)[] = [];
+  const mountEffects: ((arg: CBFnArg<S, P>) => void | Promise<void>)[] = [];
+  const unmountEffects: ((arg: CBFnArg<S, P>) => void | Promise<void>)[] = [];
 
   let renderFn: (arg: RenderFnArg<S, P, H>) => React.ReactNode = () => null;
 
-  const builder: IReactBuilder<S, P, H> = {
+  const builder: IComponentBuilder<S, P, H> = {
     name,
     state(key, initialValue) {
       if (key in useStore.getState()) {
@@ -138,7 +114,7 @@ const ReactBuilder = <
       fn: (
         arg: HandlerFnArg<S, P> & { event: React.SyntheticEvent },
       ) => void | Promise<void>,
-    ): IReactBuilder<S, P, H & Record<K, typeof fn>> {
+    ): IComponentBuilder<S, P, H & Record<K, typeof fn>> {
       handlers[name as keyof H] = (async (
         arg: HandlerFnArg<S, P> & { event: React.SyntheticEvent },
       ) => {
@@ -147,11 +123,11 @@ const ReactBuilder = <
           return await result;
         }
       }) as unknown as H[keyof H];
-      return this as unknown as IReactBuilder<S, P, H & Record<K, typeof fn>>;
-    },
-    use(fn) {
-      uses.push(fn);
-      return this;
+      return this as unknown as IComponentBuilder<
+        S,
+        P,
+        H & Record<K, typeof fn>
+      >;
     },
     mount(fn) {
       mountEffects.push(fn);
@@ -169,33 +145,40 @@ const ReactBuilder = <
       const Component: React.FC<P & { children?: React.ReactNode }> =
         React.memo(({ children, ...props }) => {
           const state = useStore();
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          const combinedProps = { ...defaultProps, ...props } as P;
 
-          uses.forEach((use) => use({ state, props: combinedProps }));
+          const combinedProps = useMemo(
+            () => ({ ...defaultProps, ...props }),
+            [props],
+          ) as P;
+
+          // 提供给各回调函数的通用参数
+          const cbArg = useMemo(
+            () => ({ state, props: combinedProps }),
+            [state, combinedProps],
+          );
 
           useMount(() => {
-            mountEffects.forEach((effect) => effect());
+            mountEffects.forEach((effect) => effect(cbArg));
           });
 
           useUnmount(() => {
-            unmountEffects.forEach((effect) => effect());
+            unmountEffects.forEach((effect) => effect(cbArg));
           });
 
           const handlerObj = useMemo(() => {
             return Object.keys(handlers).reduce(
               (acc, key) => {
                 acc[key as keyof H] = (event: React.SyntheticEvent) =>
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
                   handlers[key as keyof H]!({
-                    state,
-                    props: combinedProps,
+                    ...cbArg,
                     event,
                   });
                 return acc;
               },
               {} as { [K in keyof H]: (event: React.SyntheticEvent) => void },
             );
-          }, [state, combinedProps]);
+          }, [cbArg]);
 
           return renderFn({
             state,
@@ -205,34 +188,11 @@ const ReactBuilder = <
           });
         });
 
-      const getState = <K extends keyof S>(key: K): S[K] => {
-        return useStore.getState()[key];
-      };
-
-      const setState = <K extends keyof S>(key: K, nextState: S[K]) => {
-        useStore.setState((state) =>
-          produce(state, (draft) => {
-            // @ts-ignore
-            draft[key] = nextState;
-          }),
-        );
-      };
-
-      const useStoreSelector = <U>(selector: (state: S) => U): U => {
-        return useStore(selector);
-      };
-
-      return {
-        Component,
-        getState,
-        setState,
-        useStore: useStoreSelector,
-      };
+      return Component;
     },
   };
 
-  componentInstances.set(name, builder);
   return builder;
 };
 
-export { ReactBuilder };
+export { ComponentBuilder };

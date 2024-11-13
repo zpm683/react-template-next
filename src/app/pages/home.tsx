@@ -13,7 +13,6 @@ import { axiosInstance } from "shared/utils";
  */
 const Home: FC = () => {
   const { data, error } = useRequest(() => axiosInstance.get("users/1"));
-
   return (
     <Flex height={"100vh"} justifyContent={"center"} alignItems={"center"}>
       <Avatar alt="zpm" src={logo} sx={{ width: "15vw", height: "15vh" }} />
