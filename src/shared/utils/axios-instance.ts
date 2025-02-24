@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
-
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios from "axios";
 import type {
   AxiosRequestConfig,
@@ -10,7 +7,7 @@ import { produce } from "immer";
 import qs from "qs";
 import type { IStringifyOptions } from "qs";
 
-import { getApiServerURL, getApiTimeOut } from "./env-utils";
+import { getApiServerURL, getApiTimeOut } from "./env";
 
 // type Result<T> = {
 //   success: boolean;
@@ -146,3 +143,4 @@ const createInstance = () => {
 };
 
 export const axiosInstance = createInstance();
+export type { AxiosInstance };

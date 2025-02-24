@@ -1,8 +1,8 @@
 {
-  "port": 8080,
+  "port": 8888,
   "watch": true,
   "read-only": false,
   "no-cors": false,
   "no-gzip": false,
-  "delay": 50
+  "delay": 100
 }

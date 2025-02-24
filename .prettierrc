@@ -17,12 +17,13 @@
   "endOfLine": "auto",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
+    "react-scan",
     "^vite$",
     "^react",
     "^mui$",
     "<THIRD_PARTY_MODULES>",
-    "^app",
     "^shared",
+    "^app",
     "^[./]"
   ],
   "importOrderSeparation": true,

@@ -1,17 +1,49 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-import { isSafari } from "./env-utils";
+const isBrowser = () =>
+  !!(
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.createElement
+  );
+
+const getUserAgent = () => {
+  return window.navigator.userAgent;
+};
+
+const isSafari = () => {
+  return /\bsafari\b/i.test(getUserAgent());
+};
+
+const isChrome = () => {
+  return /\bchrome\b/i.test(getUserAgent());
+};
+
+const isSafariOrChrome = () => {
+  return /\b(safari|chrome)\b/i.test(getUserAgent());
+};
+
+const isFirefox = () => {
+  return /\b(firefox|gecko)\b/i.test(getUserAgent());
+};
+
+const isOpera = () => {
+  return /\bopera\b/i.test(getUserAgent());
+};
+
+const isIE = () => {
+  return /\bmsie\b/i.test(getUserAgent());
+};
+
+const isOnLine = () => {
+  return window.navigator.onLine;
+};
+
+const getCookie = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(";").shift();
+};
 
 const toString = (
   input: string | number | undefined,
@@ -30,30 +62,6 @@ const toBool = (input: string | number | undefined): boolean => {
 
 const toNumber = (input: string | undefined): number =>
   input ? Number(input) : 0;
-
-function on<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args: Parameters<T["addEventListener"]> | [string, Function | null, ...any]
-): void {
-  if (obj && obj.addEventListener) {
-    obj.addEventListener(
-      ...(args as Parameters<HTMLElement["addEventListener"]>),
-    );
-  }
-}
-
-function off<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args:
-    | Parameters<T["removeEventListener"]>
-    | [string, Function | null, ...any]
-): void {
-  if (obj && obj.removeEventListener) {
-    obj.removeEventListener(
-      ...(args as Parameters<HTMLElement["removeEventListener"]>),
-    );
-  }
-}
 
 /**
  * wait some time in async function
@@ -255,12 +263,20 @@ const hex2rgb = (hex: string, opacity = 1) => {
 };
 
 export {
+  isSafari,
+  isChrome,
+  isSafariOrChrome,
+  isFirefox,
+  isOpera,
+  isIE,
+  isOnLine,
+  getCookie,
+  isBrowser,
+  getUserAgent,
   wait,
   toString,
   toBool,
   toNumber,
-  on,
-  off,
   buildCsvUrl,
   saveAs,
   copyToClipboard,

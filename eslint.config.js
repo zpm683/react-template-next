@@ -8,9 +8,6 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-
   {
     ignores: [
       "**/node_modules",
@@ -18,10 +15,12 @@ export default tseslint.config(
       "dist",
       ".madgerc",
       "coverage",
+      ".storybook",
     ],
   },
   {
     name: "common",
+    extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: "latest",
       parserOptions: {
