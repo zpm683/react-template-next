@@ -1,5 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
+import { DialogerProvider } from "shared/components";
 import { AppBuilder } from "shared/utils";
 
 import { APP_PATH } from "./constants";
@@ -9,6 +10,7 @@ import { theme } from "./themes";
 const App = AppBuilder()
   .provider(CssBaseline)
   .provider(ThemeProvider, { theme })
+  .provider(DialogerProvider)
   .page({
     path: APP_PATH.ROOT,
     element: <Home />,

@@ -63,6 +63,7 @@ export default tseslint.config(
       "no-implied-eval": "warn",
       "no-invalid-regexp": "warn",
       "no-iterator": "warn",
+      "no-irregular-whitespace": "warn",
       "no-label-var": "warn",
       "no-labels": ["warn", { allowLoop: true, allowSwitch: false }],
       "no-lone-blocks": "warn",

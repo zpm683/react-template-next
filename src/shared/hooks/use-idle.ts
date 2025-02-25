@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { throttle } from "es-toolkit";
-
-import { off, on } from "../utils";
+import { off, on, throttle } from "../utils";
 
 const defaultEvents = [
   "mousemove",
