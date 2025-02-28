@@ -144,7 +144,7 @@ const AppBuilder = () => {
 
         return (
           <ErrorBoundary fallbackRender={fallbackRender}>
-            <BrowserRouter>
+            <BrowserRouter basename={import.meta.env.ENV_APP_BASE_URL}>
               {renderProviders(
                 <Routes>
                   {pages.map(({ path, isPrivate, element, index }) => (

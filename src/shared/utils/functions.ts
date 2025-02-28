@@ -500,3 +500,20 @@ export function throttle<T extends (...args: any[]) => any>(
     }
   };
 }
+
+export const getUrlParam = () => {
+  let urlParamStr = window.location.search;
+  if (urlParamStr) {
+    //?を除去
+    urlParamStr = urlParamStr.substring(1);
+    let params: { [k: string]: string } = {};
+    urlParamStr.split("&").forEach((param) => {
+      const temp = param.split("=");
+      params = {
+        ...params,
+        [temp[0]]: temp[1],
+      };
+    });
+    return params;
+  }
+};

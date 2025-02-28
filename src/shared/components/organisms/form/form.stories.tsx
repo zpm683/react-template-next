@@ -24,7 +24,7 @@ const schema = z.object({
   age: z
     .string()
     .min(1, { message: "必須項目" })
-    .max(2, { message: "最大値超過" }),
+    .max(3, { message: "最大値超過" }),
   comment: z.string().optional(),
   sex: z.string().min(1, { message: "必須項目" }),
   type: z.string().min(1, { message: "必須項目" }),
