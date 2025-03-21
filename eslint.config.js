@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
 import prettierConfig from "eslint-config-prettier";
+import checkFile from "eslint-plugin-check-file";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -32,6 +33,10 @@ export default tseslint.config(
         ...globals.browser,
         ...globals.node,
       },
+    },
+
+    plugins: {
+      "check-file": checkFile,
     },
 
     // http://eslint.org/docs/rules/
@@ -196,6 +201,25 @@ export default tseslint.config(
         },
       ],
       "@typescript-eslint/no-useless-constructor": "warn",
+
+      //check file
+      // https://github.com/dukeluo/eslint-plugin-check-file
+      "check-file/no-index": "off",
+      "check-file/filename-naming-convention": [
+        "error",
+        {
+          "**/*.{jsx,tsx}": "KEBAB_CASE",
+          "**/*.{js,ts}": "KEBAB_CASE",
+        },
+        { ignoreMiddleExtensions: true },
+      ],
+      // "check-file/folder-naming-convention": [
+      //   "error",
+      //   {
+      //     "src/**/": "KEBAB_CASE",
+      //     "!src/app/@types/": "KEBAB_CASE",
+      //   },
+      // ],
     },
   },
 
