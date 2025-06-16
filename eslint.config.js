@@ -320,6 +320,23 @@ export default tseslint.config(
       ],
     },
   },
-
+  {
+    name: "cypress-config",
+    files: ["cypress/**/*.{js,jsx,ts,tsx}", "src/e2e/**/*.cy.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        cy: "readonly",
+        Cypress: "readonly",
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        before: "readonly",
+        afterEach: "readonly",
+        after: "readonly",
+      },
+    },
+  },
   prettierConfig,
 );
