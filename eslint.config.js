@@ -251,12 +251,22 @@ export default tseslint.config(
     },
     rules: {
       // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
+      "react/jsx-key": "error",
+      "react/jsx-uses-vars": "error",
+      "react/no-children-prop": "error",
+      "react/no-danger-with-children": "error",
+      "react/no-find-dom-node": "error",
+      "react/no-render-return-value": "error",
+      "react/no-string-refs": "error",
+      "react/no-unescaped-entities": "error",
+      "react/no-unknown-property": "error",
+      "react/no-unsafe": "error",
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/forbid-foreign-prop-types": ["warn", { allowInPropTypes: true }],
-      "react/jsx-no-comment-textnodes": "warn",
-      "react/jsx-no-duplicate-props": "warn",
-      "react/jsx-no-target-blank": "warn",
+      "react/jsx-no-comment-textnodes": "error",
+      "react/jsx-no-duplicate-props": "error",
+      "react/jsx-no-target-blank": "error",
       "react/jsx-no-undef": "error",
       "react/jsx-pascal-case": [
         "warn",
@@ -270,11 +280,11 @@ export default tseslint.config(
       // See https://github.com/facebook/create-react-app/issues/5204 for
       // blockers until its re-enabled
       // 'react/no-deprecated': 'warn',
-      "react/no-direct-mutation-state": "warn",
-      "react/no-is-mounted": "warn",
+      "react/no-direct-mutation-state": "error",
+      "react/no-is-mounted": "error",
       "react/no-typos": "error",
       "react/require-render-return": "error",
-      "react/style-prop-object": "warn",
+      "react/style-prop-object": "error",
 
       // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
       "jsx-a11y/alt-text": "warn",

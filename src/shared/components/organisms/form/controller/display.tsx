@@ -34,8 +34,9 @@ const DisplayController: React.FC<DisplayControllerProps> = ({
         labelText={label}
         alignWidth={alignWidth}
         valueText={field.value}
-        children={children}
-      />
+      >
+        {children}
+      </Label>
       {showErrorHelper && (
         <ErrorHelper
           noLable={!label}

@@ -6,9 +6,15 @@ import colors from "picocolors";
 import { visualizer } from "rollup-plugin-visualizer";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import progress from "vite-plugin-progress";
+import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const ENV_PREFIX = "ENV_";
+
+const getDistFolderName = (mode: string) => {
+  if (mode === "production") return "dist";
+  return `dist-${mode}`;
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -18,6 +24,9 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       react(),
       tsconfigPaths(),
+      svgr({
+        include: "**/*.svg",
+      }),
       {
         ...visualizer(),
         apply: "build",
@@ -59,7 +68,7 @@ export default defineConfig(({ command, mode }) => {
     },
     base: env.ENV_APP_BASE_URL,
     build: {
-      outDir: "dist",
+      outDir: getDistFolderName(mode),
       rollupOptions: {
         output: {
           manualChunks: {

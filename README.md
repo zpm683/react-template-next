@@ -16,18 +16,19 @@
 - ⚓ page-router by [react-router](https://reactrouter.com/)
 - 💥 error-boundary by [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 - 🪝 react-hooks by [ahooks](https://ahooks.js.org/)
-- 📡 http-client by [react-query](https://tanstack.com/query/) & [axios](https://axios-http.com/)
+- 📡 http-client by [use-request](https://ahooks.js.org/hooks/use-request/index) & [axios](https://axios-http.com/)
 - 🪄 makes typescript's built-in typings be better by [ts-reset](https://github.com/total-typescript/ts-reset)
 - 🎏 create immutable-state by [immer](https://immerjs.github.io/immer/)
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
 - 🐙 unit-test by [@testing-library](https://testing-library.com/)
-- 🎭 e2e-test by [playwright](https://playwright.dev/)
+- 🎭 e2e-test by [cypress](https://www.cypress.io/)
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)
 - 🔍 dependencies checker by [madge](https://github.com/pahen/madge)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
+- 🚀 performance monitoring by [react-scan](https://react-scan.com/)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
-- 🧩 other tools:[json-server](https://github.com/typicode/json-server) [es-toolkit](https://github.com/toss/es-toolkit/tree/main) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
+- 🧩 other tools:[json-server](https://github.com/typicode/json-server) [radash](https://github.com/toss/radash/tree/main) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
 
 ### About Env 🌌
 
@@ -49,20 +50,14 @@ Step1：clone this project
 
 that's all, happy hacking!
 
-### How to build all in one HTML file? 📜
-
-just set this env in .env.production file!
-
-```
-ENV_BUILD_IN_SINGLEFILE = true
-```
-
 ### Script 🪃
 
 - dev
+- mock
 - build
 - preview
 - test
+- e2e-test
 - lint
 - coverage
 - storybook
@@ -114,12 +109,10 @@ ENV_BUILD_IN_SINGLEFILE = true
     | ├─constants
     | ├─hooks
     | ├─layouts
-    | ├─pages
-    | ├─routers (// TODO: ReactBuilder)
+    | ├─features
     | ├─stores
     | ├─themes
     | ├─utils
-    | ├─error.tsx
     | ├─app.tsx
     | └─index.ts
     ├─shared

@@ -46,8 +46,9 @@ export const Label: React.FC<LabelProps> = ({
             textAlign: "right",
           }}
           color={color}
-          children={valueText}
-        />
+        >
+          {valueText}
+        </Typography>
       )}
       {children}
     </Box>

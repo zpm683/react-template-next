@@ -517,3 +517,25 @@ export const getUrlParam = () => {
     return params;
   }
 };
+
+export const fileToBase64 = (file: File) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+export const base64ToObjectURL = (base64: string, mimeType: string) => {
+  const byteString = atob(base64);
+  const arrayBuffer = new ArrayBuffer(byteString.length);
+  const uint8Array = new Uint8Array(arrayBuffer);
+
+  for (let i = 0; i < byteString.length; i++) {
+    uint8Array[i] = byteString.charCodeAt(i);
+  }
+
+  const blob = new Blob([uint8Array], { type: mimeType });
+  return URL.createObjectURL(blob);
+};

@@ -1,6 +1,12 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import { useMount, useUnmount } from "ahooks";
 
@@ -40,6 +46,11 @@ interface IAppBuilder {
 
 let appInstance: IAppBuilder | undefined = undefined;
 
+type Options = Partial<{
+  useHashRouter: boolean;
+  notUseBaseName: boolean;
+}>;
+
 /**
  * A React App Builder
  * @example
@@ -60,7 +71,7 @@ let appInstance: IAppBuilder | undefined = undefined;
  *  .build();
  *
  */
-const AppBuilder = () => {
+const AppBuilder = (options?: Options) => {
   if (appInstance) return appInstance;
 
   // Array to store page information
@@ -142,9 +153,19 @@ const AppBuilder = () => {
           );
         };
 
+        const RouterByType = options?.useHashRouter
+          ? HashRouter
+          : BrowserRouter;
+
         return (
           <ErrorBoundary fallbackRender={fallbackRender}>
-            <BrowserRouter basename={import.meta.env.ENV_APP_BASE_URL}>
+            <RouterByType
+              basename={
+                options?.notUseBaseName
+                  ? undefined
+                  : import.meta.env.ENV_APP_BASE_URL
+              }
+            >
               {renderProviders(
                 <Routes>
                   {pages.map(({ path, isPrivate, element, index }) => (
@@ -168,7 +189,7 @@ const AppBuilder = () => {
                   <Route path="*" element={notFoundPage} />
                 </Routes>,
               )}
-            </BrowserRouter>
+            </RouterByType>
           </ErrorBoundary>
         );
       };

@@ -22,7 +22,6 @@ type DomMap = Map<MapKey, HTMLElement>;
  *         key={item.id}
  *         ref={setDom(item.id)}
  *         onClick={(e)=>handleClick(item.id)}
- *         children={item.name}
  *       />
  *     );
  *   });

@@ -50,14 +50,14 @@ const Dialoger = withRefFC<DialogerHandler, PropsWithChildren>((ref) => {
 
   const body = useMemo(() => {
     if (isString(option.body)) {
-      return <Typography children={option.body} />;
+      return <Typography>{option.body}</Typography>;
     }
 
     if (isArray(option.body)) {
       return (
         <Box>
           {option.body.map((msg, index) => (
-            <Typography key={index} children={msg} />
+            <Typography key={index}>{msg}</Typography>
           ))}
         </Box>
       );
