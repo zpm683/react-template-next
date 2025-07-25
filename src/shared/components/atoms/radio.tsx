@@ -1,10 +1,7 @@
 import { forwardRef, PropsWithChildren } from "react";
 
-import {
-  FormControlLabel,
-  Radio as MuiRadio,
-  RadioProps as MuiRadioProps,
-} from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import MuiRadio, { RadioProps as MuiRadioProps } from "@mui/material/Radio";
 
 /** Props */
 export type RadioProps = MuiRadioProps & PropsWithChildren;

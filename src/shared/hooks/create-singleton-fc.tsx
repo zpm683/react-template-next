@@ -6,7 +6,7 @@ function createSingletonFC<Handler, Props>(
     React.RefAttributes<Handler> & React.PropsWithoutRef<Props | {}>
   >,
 ) {
-  const context = createContext<React.RefObject<Handler>>({
+  const context = createContext<React.RefObject<Handler | null>>({
     current: null,
   });
 

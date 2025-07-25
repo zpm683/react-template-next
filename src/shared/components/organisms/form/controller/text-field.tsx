@@ -1,6 +1,6 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { colors } from "@mui/material";
+import { red } from "@mui/material/colors";
 
 import { TextField, TextFieldProps } from "../../../atoms";
 import { Label } from "../../../atoms";
@@ -50,10 +50,6 @@ const TextFieldController: React.FC<TextFieldControllerProps> = ({
           onValChange={onChange}
           disabled={disabled}
           size="small"
-          style={{
-            backgroundColor: error ? colors.red[100] : "white",
-            ...textFieldProps.style,
-          }}
         />
         <span>{unit}</span>
       </Label>

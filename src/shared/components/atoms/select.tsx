@@ -1,12 +1,8 @@
 import { forwardRef, PropsWithChildren } from "react";
 
-import {
-  FormControl,
-  MenuItem,
-  MenuItemProps,
-  Select as MuiSelect,
-  SelectProps as MuiSelectProps,
-} from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
+import MuiSelect, { SelectProps as MuiSelectProps } from "@mui/material/Select";
 
 /** Select Props */
 export type SelectProps = MuiSelectProps &

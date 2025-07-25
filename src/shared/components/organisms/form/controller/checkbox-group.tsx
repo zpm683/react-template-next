@@ -1,6 +1,6 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { FormGroup, FormGroupProps } from "@mui/material";
+import FormGroup, { FormGroupProps } from "@mui/material/FormGroup";
 
 import { Checkbox, CheckboxProps, Label } from "../../../atoms";
 import { ErrorHelper } from "../error-helper";

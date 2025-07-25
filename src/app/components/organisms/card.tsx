@@ -1,12 +1,10 @@
 import { FC } from "react";
 
-import {
-  Button,
-  CardActions,
-  CardContent,
-  Card as MuiCard,
-  Typography,
-} from "@mui/material";
+import Button from "@mui/material/Button";
+import MuiCard from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 import { Header } from "../molecules";
 

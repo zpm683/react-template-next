@@ -169,6 +169,13 @@ export default tseslint.config(
         },
       ],
       "getter-return": "warn",
+      // https://mui.com/material-ui/guides/minimizing-bundle-size/#enforce-best-practices-with-eslint
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [{ regex: "^@mui/[^/]+$" }],
+        },
+      ],
 
       // Add TypeScript specific rules
       "@typescript-eslint/no-empty-object-type": "warn",

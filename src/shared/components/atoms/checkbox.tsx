@@ -1,10 +1,9 @@
 import { forwardRef, PropsWithChildren } from "react";
 
-import {
-  FormControlLabel,
-  Checkbox as MuiCheckbox,
+import MuiCheckbox, {
   CheckboxProps as MuiCheckboxProps,
-} from "@mui/material";
+} from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 /** Props */
 export type CheckboxProps = MuiCheckboxProps & PropsWithChildren;

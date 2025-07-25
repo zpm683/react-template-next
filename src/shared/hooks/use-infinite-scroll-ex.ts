@@ -72,7 +72,7 @@ const useInfiniteScrollEx = <TData extends Data>(
   const [loadingMore, setLoadingMore] = useState(false);
   const isScrollToTop = direction === "top";
   // lastScrollTop is used to determine whether the scroll direction is up or down
-  const lastScrollTop = useRef<number>();
+  const lastScrollTop = useRef<number | undefined>(undefined);
   // scrollBottom is used to record the distance from the bottom of the scroll bar
   const scrollBottom = useRef<number>(0);
 

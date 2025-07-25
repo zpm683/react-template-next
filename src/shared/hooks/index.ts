@@ -4,3 +4,4 @@ export * from "./use-doms";
 export * from "./create-singleton-fc";
 export * from "./use-window-size";
 export * from "./with-ref";
+export * from "./use-clipboard";

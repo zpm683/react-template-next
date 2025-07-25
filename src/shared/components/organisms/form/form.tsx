@@ -6,7 +6,7 @@ import {
   SubmitHandler,
 } from "react-hook-form";
 
-import { Box, BoxProps } from "@mui/material";
+import Box, { BoxProps } from "@mui/material/Box";
 
 import { FormUiContext, FormUiProvider } from "./form-context";
 

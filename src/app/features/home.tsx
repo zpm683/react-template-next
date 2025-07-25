@@ -1,4 +1,7 @@
-import { Avatar, Button, Skeleton, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Skeleton from "@mui/material/Skeleton";
+import Typography from "@mui/material/Typography";
 import { useRequest } from "ahooks";
 
 import { Show, useDialoger } from "shared/components";
@@ -22,7 +25,7 @@ const Home = () => {
   const handleClickOpen = (id: number) => {
     const target = data?.find((i) => i.id === id);
 
-    dialoger.current.open({
+    dialoger.current?.open({
       title: "ID",
       body: (
         <div>

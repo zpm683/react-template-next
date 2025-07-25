@@ -1,6 +1,6 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { MenuItemProps } from "@mui/material";
+import { MenuItemProps } from "@mui/material/MenuItem";
 
 import { Label, Select, SelectProps } from "../../../atoms";
 import { ErrorHelper } from "../error-helper";

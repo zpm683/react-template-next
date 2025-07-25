@@ -1,7 +1,6 @@
-import {
-  TextField as MuiTextField,
+import MuiTextField, {
   TextFieldProps as MuiTextFieldProps,
-} from "@mui/material";
+} from "@mui/material/TextField";
 
 const INPUT_TYPES_SOLVER_MAP = {
   /** 数字 */

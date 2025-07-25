@@ -1,6 +1,9 @@
 import { FieldError } from "react-hook-form";
 
-import { colors, FormHelperText, FormHelperTextProps } from "@mui/material";
+import { red } from "@mui/material/colors";
+import FormHelperText, {
+  FormHelperTextProps,
+} from "@mui/material/FormHelperText";
 
 import { useFormUiContext } from "./form-context";
 
@@ -29,7 +32,7 @@ const ErrorHelper: React.FC<ErrorHelperProps> = ({
     <FormHelperText
       {...props}
       style={{
-        color: colors.red["500"],
+        color: red["500"],
         marginLeft,
         ...props.style,
       }}

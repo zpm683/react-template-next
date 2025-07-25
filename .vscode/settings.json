@@ -84,5 +84,6 @@
     "REVIEW",
     "XXX"
   ],
-  "todo-tree.general.statusBar": "total"
+  "todo-tree.general.statusBar": "total",
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^@mui/[^/]+$"]
 }

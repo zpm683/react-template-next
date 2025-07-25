@@ -1,22 +1,24 @@
 import {
-  ElementRef,
+  ComponentRef,
   forwardRef,
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
-  MutableRefObject,
   ReactElement,
   RefAttributes,
+  RefObject,
   useRef,
 } from "react";
 
 /** Ref passed to the parent component */
 type HandlerRef<T> =
   | ((instance: T | null) => void)
-  | MutableRefObject<T | null>
+  | RefObject<T | null>
   | null;
 
 /** Ref passed to useRef for methods exposed by the child component */
-type UseRefHandler<T> = ElementRef<ForwardRefExoticComponent<RefAttributes<T>>>;
+type UseRefHandler<T> = ComponentRef<
+  ForwardRefExoticComponent<RefAttributes<T>>
+>;
 
 /**
  * Makes a FunctionComponent accessible via ref.
@@ -46,7 +48,7 @@ type UseRefHandler<T> = ElementRef<ForwardRefExoticComponent<RefAttributes<T>>>;
  *
  *  @see useHandlerRef Hook to use the ref
  */
-export const withRefFC = <Handler, Props = {}>(
+export const withRefFC = <Handler, Props = object>(
   funcComp: (ref: HandlerRef<Handler>, props: Props) => ReactElement | null,
 ) => {
   const HoC: ForwardRefRenderFunction<Handler, Props> = (p, r) =>

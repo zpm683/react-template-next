@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import type { Meta } from "@storybook/react";
 
 import { Dialoger, DialogerProvider, useDialoger } from "./dialogger";

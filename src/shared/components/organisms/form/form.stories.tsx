@@ -1,7 +1,8 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, MenuItemProps } from "@mui/material";
+import Button from "@mui/material/Button";
+import { MenuItemProps } from "@mui/material/MenuItem";
 import type { Meta } from "@storybook/react";
 import { z } from "zod";
 
@@ -38,7 +39,7 @@ const schema = z.object({
 
 type Inputs = z.infer<typeof schema>;
 
-const formKey = schema.keyof().Values;
+const formKey = schema.keyof().enum;
 
 const defaultValue: Inputs = {
   kana: "",

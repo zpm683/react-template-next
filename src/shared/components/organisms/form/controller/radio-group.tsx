@@ -1,6 +1,6 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { RadioGroup, RadioGroupProps } from "@mui/material";
+import RadioGroup, { RadioGroupProps } from "@mui/material/RadioGroup";
 
 import { Label, Radio, RadioProps } from "../../../atoms";
 import { ErrorHelper } from "../error-helper";
