@@ -10,7 +10,7 @@ export type LabelProps = {
   color?: "primary" | "secondary";
 } & React.PropsWithChildren;
 
-export const Label: React.FC<LabelProps> = ({
+export const Label = ({
   color = "primary",
   labelText,
   alignWidth,
@@ -18,7 +18,7 @@ export const Label: React.FC<LabelProps> = ({
   valueText,
   required = false,
   children,
-}) => {
+}: LabelProps) => {
   return (
     <Box display={"flex"} alignItems={"center"} gap={1}>
       {!hiddenLable && (

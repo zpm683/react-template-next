@@ -1,7 +1,5 @@
 import { useRef } from "react";
 
-import { useMemoizedFn } from "ahooks";
-
 type MapKey = string | number;
 type DomMap = Map<MapKey, HTMLElement>;
 
@@ -31,12 +29,12 @@ type DomMap = Map<MapKey, HTMLElement>;
 export const useDoms = () => {
   const ref = useRef<DomMap | null>(null);
 
-  const getDomMap = useMemoizedFn(() => {
+  const getDomMap = () => {
     if (!ref.current) {
       ref.current = new Map();
     }
     return ref.current;
-  });
+  };
 
   const setDom = (id: MapKey) => (node: HTMLElement | null) => {
     const map = getDomMap();
@@ -46,8 +44,8 @@ export const useDoms = () => {
   const getDom = (id: MapKey) => getDomMap().get(id);
 
   return {
-    setDom: useMemoizedFn(setDom),
-    getDom: useMemoizedFn(getDom),
+    setDom,
+    getDom,
   };
 };
 

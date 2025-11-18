@@ -129,7 +129,7 @@ that's all, happy hacking!
 
 ### About React-Clean-Architecture 🧐
 
-![react-clean-architecture](./architecture.png)
+![react-clean-architecture](./docs/architecture.png)
 
 ### Demo ⚛️
 

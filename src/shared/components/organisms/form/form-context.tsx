@@ -12,11 +12,11 @@ const formContext = createContext<FormUiContext>({
 
 const useFormUiContext = () => useContext(formContext);
 
-const FormUiProvider: React.FC<FormUiContext> = ({
+const FormUiProvider = ({
   alignWidth,
   hiddenAllErrorHelper,
   children,
-}) => {
+}: FormUiContext) => {
   const context = useMemo(
     () => ({
       alignWidth: alignWidth,

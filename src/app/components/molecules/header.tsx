@@ -6,7 +6,7 @@ type HeaderProps = {
   title?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ title = "title" }) => {
+const Header = ({ title = "title" }: HeaderProps) => {
   return (
     <Box>
       <Title>{title}</Title>

@@ -13,11 +13,11 @@ type ErrorHelperProps = FormHelperTextProps & {
 };
 
 const LABEL_INPUTER_GAP = 12;
-const ErrorHelper: React.FC<ErrorHelperProps> = ({
+const ErrorHelper = ({
   fieldError,
   noLable = false,
   ...props
-}) => {
+}: ErrorHelperProps) => {
   const { alignWidth } = useFormUiContext();
 
   if (!fieldError) return null;

@@ -1,5 +1,3 @@
-import { PropsWithChildren } from "react";
-
 import Button from "@mui/material/Button";
 import type { Meta } from "@storybook/react";
 
@@ -12,7 +10,7 @@ const meta = {
 
 export default meta;
 
-const Comp: React.FC<PropsWithChildren> = () => {
+const Comp = () => {
   const dialoger = useDialoger();
   const handleClick = () => {
     dialoger.current?.open();

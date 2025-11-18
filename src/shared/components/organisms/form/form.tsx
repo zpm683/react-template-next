@@ -11,10 +11,7 @@ import Box, { BoxProps } from "@mui/material/Box";
 import { FormUiContext, FormUiProvider } from "./form-context";
 
 type FormBoxProps = BoxProps & React.FormHTMLAttributes<HTMLFormElement>;
-const FormBox: React.PropsWithChildren<React.FC<FormBoxProps>> = ({
-  children,
-  ...props
-}) => {
+const FormBox = ({ children, ...props }: FormBoxProps) => {
   return (
     <Box {...props} component="form">
       {children}
@@ -35,7 +32,7 @@ type FormProps = FormBaseProps &
 /**
  * Form
  */
-const Form: React.FC<FormProps> = ({
+const Form = ({
   form,
   onSuccess,
   onError,
@@ -43,7 +40,7 @@ const Form: React.FC<FormProps> = ({
   alignWidth,
   hiddenAllErrorHelper,
   ...rootProps
-}) => {
+}: FormProps) => {
   const { handleSubmit } = form;
 
   return (

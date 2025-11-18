@@ -12,7 +12,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
-import { useMemoizedFn } from "ahooks";
 
 import { createSingletonFC, withRefFC } from "shared/hooks";
 import { isArray, isString } from "shared/utils";
@@ -75,15 +74,15 @@ const Dialoger = withRefFC<DialogerHandler, PropsWithChildren>((ref) => {
     },
   }));
 
-  const handleClickOK = useMemoizedFn(() => {
+  const handleClickOK = () => {
     option.onOK();
     if (option.autoClose) setOpen(false);
-  });
+  };
 
-  const handleClickNG = useMemoizedFn(() => {
+  const handleClickNG = () => {
     option.onNG();
     if (option.autoClose) setOpen(false);
-  });
+  };
 
   if (!open) return null;
 

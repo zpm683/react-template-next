@@ -11,7 +11,7 @@ type CheckboxGroupControllerProps = CommonControllerProps & {
   options: CheckboxProps[];
 } & OmitRenderProps<FormGroupProps>;
 
-const CheckboxGroupController: React.FC<CheckboxGroupControllerProps> = ({
+const CheckboxGroupController = ({
   name,
   options,
   errorHelperProps,
@@ -21,7 +21,7 @@ const CheckboxGroupController: React.FC<CheckboxGroupControllerProps> = ({
   hiddenErrorHelper = false,
   labelProps,
   ...formGroupProps
-}) => {
+}: CheckboxGroupControllerProps) => {
   const { control } = useFormContext();
   const {
     field: { ref, onChange, value: checkedVal = [], ...rest },

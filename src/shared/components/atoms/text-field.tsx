@@ -21,12 +21,12 @@ type TextFieldProps = {
   onValChange?: (val: string) => void;
 } & MuiTextFieldProps;
 
-const TextField: React.FC<TextFieldProps> = ({
+const TextField = ({
   maxLength,
   inputTypes,
   onValChange = () => undefined,
   ...props
-}) => {
+}: TextFieldProps) => {
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let val = e.target.value;
 

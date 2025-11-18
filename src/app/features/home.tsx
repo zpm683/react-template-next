@@ -7,7 +7,7 @@ import { useRequest } from "ahooks";
 import { Show, useDialoger } from "shared/components";
 
 import { getUsers } from "app/apis";
-import { LOGO_PNG } from "app/assets";
+import { LOGO_PNG, VITE_LOGO } from "app/assets";
 import { Card } from "app/components";
 import { Flex } from "app/layout";
 import { useGlobalStore } from "app/stores";
@@ -41,7 +41,9 @@ const Home = () => {
       <Avatar alt="zpm" src={LOGO_PNG} sx={{ width: "15vw", height: "20vh" }} />
       <Flex flexDirection={"column"}>
         <Typography variant="h4">
-          {`Welcome to use react-template-next 🎉x${conut}`}
+          {`Welcome to use react-template-next`}
+          <VITE_LOGO />
+          {`x${conut}`}
         </Typography>
         <Button onClick={handleClickAdd}>ADD conut</Button>
         <Show

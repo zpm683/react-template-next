@@ -1,12 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import type { DependencyList } from "react";
 
-import {
-  useEventListener,
-  useMemoizedFn,
-  useRequest,
-  useUpdateEffect,
-} from "ahooks";
+import { useEventListener, useRequest, useUpdateEffect } from "ahooks";
 import { BasicTarget, getTargetElement } from "ahooks/es/utils/domTarget";
 import {
   getClientHeight,
@@ -127,17 +122,17 @@ const useInfiniteScrollEx = <TData extends Data>(
     },
   );
 
-  const loadMore = useMemoizedFn(() => {
+  const loadMore = () => {
     if (noMore) return;
     setLoadingMore(true);
     run(finalData);
-  });
+  };
 
-  const loadMoreAsync = useMemoizedFn(() => {
+  const loadMoreAsync = () => {
     if (noMore) return Promise.reject();
     setLoadingMore(true);
     return runAsync(finalData);
-  });
+  };
 
   const reload = () => {
     setLoadingMore(false);
@@ -220,8 +215,8 @@ const useInfiniteScrollEx = <TData extends Data>(
 
     loadMore,
     loadMoreAsync,
-    reload: useMemoizedFn(reload),
-    reloadAsync: useMemoizedFn(reloadAsync),
+    reload: reload,
+    reloadAsync: reloadAsync,
     mutate: setFinalData,
     cancel,
   };

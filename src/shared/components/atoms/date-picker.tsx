@@ -6,10 +6,9 @@ import {
   DatePickerProps as MuiDatePickerProps,
 } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { Dayjs } from "dayjs";
 import "dayjs/locale/ja";
 
-export type DatePickerProps = MuiDatePickerProps<Dayjs> & {
+export type DatePickerProps = MuiDatePickerProps & {
   placeholder?: string;
 };
 
@@ -72,7 +71,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 },
               },
               variant: "standard",
-              inputProps: { ...params.inputProps, placeholder },
+              inputProps: { placeholder },
             }),
           }}
           {...restProps}

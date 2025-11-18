@@ -1,7 +1,8 @@
 /// <reference types="vitest/config" />
 import { defineConfig, loadEnv } from "vite";
 
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
+// import react from "@vitejs/plugin-react-swc"; in the future, use swc when react-compiler is supported
 import colors from "picocolors";
 import { visualizer } from "rollup-plugin-visualizer";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
@@ -22,7 +23,11 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     plugins: [
-      react(),
+      react({
+        babel: {
+          plugins: ["babel-plugin-react-compiler"],
+        },
+      }),
       tsconfigPaths(),
       svgr({
         include: "**/*.svg",
