@@ -37,9 +37,16 @@ const Home = () => {
   };
 
   return (
-    <Flex height={"100vh"} justifyContent={"center"} alignItems={"center"}>
+    <Flex
+      sx={{
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 4,
+      }}
+    >
       <Avatar alt="zpm" src={LOGO_PNG} sx={{ width: "15vw", height: "20vh" }} />
-      <Flex flexDirection={"column"}>
+      <Flex sx={{ flexDirection: "column" }}>
         <Typography variant="h4">
           {`Welcome to use react-template-next`}
           <VITE_LOGO />
@@ -50,7 +57,7 @@ const Home = () => {
           trigger={!loading}
           fallback={<Skeleton width={"100%"} height={"10vh"} />}
         >
-          <Flex gap={2}>
+          <Flex sx={{ gap: 2 }}>
             {data?.map((item, index) => (
               <Card
                 key={index}

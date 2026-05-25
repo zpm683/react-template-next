@@ -20,7 +20,9 @@ export const Label = ({
   children,
 }: LabelProps) => {
   return (
-    <Box display={"flex"} alignItems={"center"} gap={1}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}
+    >
       {!hiddenLable && (
         <Typography
           sx={{

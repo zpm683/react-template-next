@@ -119,7 +119,7 @@ const Dialoger = withRefFC<DialogerHandler, PropsWithChildren>((ref) => {
           minHeight: "104px",
         }}
       >
-        <Box padding={"12px 24px"}>{body}</Box>
+        <Box sx={{ padding: "12px 24px" }}>{body}</Box>
       </DialogContent>
       <DialogActions
         sx={{
@@ -130,14 +130,14 @@ const Dialoger = withRefFC<DialogerHandler, PropsWithChildren>((ref) => {
         }}
       >
         <Box
-          padding={"12px"}
-          display={"flex"}
-          alignContent={"center"}
-          justifyContent={"space-around"}
-          width={"100%"}
-          borderTop={"1px solid #F4F4F4"}
           sx={{
+            padding: "12px",
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "space-around",
+            width: "100%",
             backgroundColor: "#ffffff",
+            borderTop: "1px solid #F4F4F4",
           }}
         >
           <Button variant="contained" onClick={handleClickNG}>

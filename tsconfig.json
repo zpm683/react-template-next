@@ -4,17 +4,19 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "shared/*": ["./src/shared/*"],
+      "app/*": ["./src/app/*"]
+    },
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src", "vite.config.ts", "cypress", "cypress.config.ts"],

@@ -2,13 +2,16 @@ import { FC } from "react";
 
 import Box, { BoxProps } from "@mui/material/Box";
 
-export const Flex: FC<BoxProps> = ({ children, ...props }) => {
+export const Flex: FC<BoxProps> = ({ children, sx, ...props }) => {
   return (
     <Box
-      display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      overflow="hidden auto"
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        overflow: "hidden auto",
+        ...sx,
+      }}
       {...props}
     >
       {children}

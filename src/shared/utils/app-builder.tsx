@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import {
   BrowserRouter,
   HashRouter,
@@ -11,10 +11,7 @@ import {
 import { useMount, useUnmount } from "ahooks";
 
 // Type definition for a fallback render function used in error boundaries
-type FallbackRender = (props: {
-  error: { message: string }; // Error object with a message property
-  resetErrorBoundary: (...args: unknown[]) => void; // Function to reset the error boundary
-}) => React.ReactNode;
+type FallbackRender = (props: FallbackProps) => React.ReactNode;
 
 // Type definition for router configuration
 type RouterConfig = {
@@ -91,7 +88,9 @@ const AppBuilder = (options?: Options) => {
     return (
       <div role="alert">
         <p>Something went wrong:</p>
-        <pre style={{ color: "red" }}>{error.message}</pre>
+        <pre style={{ color: "red" }}>
+          {error instanceof Error ? error.message : String(error)}
+        </pre>
       </div>
     );
   };
