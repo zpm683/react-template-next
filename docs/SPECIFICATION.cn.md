@@ -29,9 +29,6 @@
 │   ├─launch.json         # VSCode 调试配置
 │   └─settings.json       # VSCode 工作区设置
 ├─coverage                # 测试覆盖率报告输出目录
-├─cypress                 # Cypress 端到端测试相关目录
-│   ├─fixtures            # 测试用的模拟数据
-│   └─support             # Cypress 支持文件（如自定义命令等）
 ├─dist                    # 项目构建输出目录
 ├─node_modules            # 项目依赖包目录
 ├─public                  # 公共静态资源目录
@@ -43,7 +40,7 @@
 ├─.prettierignore         # Prettier 格式化忽略文件
 ├─.prettierrc             # Prettier 格式化配置文件
 ├─architecture.png        # 项目架构图
-├─cypress.config.ts       # Cypress 测试配置文件
+├─playwright.config.ts    # Playwright 测试配置文件
 ├─dependencies.svg        # 依赖关系可视化图
 ├─eslint.config.js        # ESLint 代码规范配置文件
 ├─index.html              # 项目入口 HTML 文件
@@ -147,8 +144,8 @@
 - 🐙 unit-test by [@testing-library](https://testing-library.com/)  
   【组件测试工具】—— 提供一套以用户为中心的测试方法，专注于组件行为而非实现细节。
 
-- 🎭 e2e-test by [cypress](https://www.cypress.io/)  
-  【端到端测试】—— cypress 用于自动化浏览器测试，模拟真实用户操作，保障应用整体功能。
+- 🎭 e2e-test by [playwright](https://playwright.dev/)  
+  【端到端测试】—— playwright 用于自动化浏览器测试，模拟真实用户操作，保障应用整体功能。
 
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)  
   【代码规范与格式化】—— eslint 用于代码质量检查，prettier 用于统一代码风格。

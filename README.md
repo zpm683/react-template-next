@@ -22,7 +22,7 @@
 - 📅 date-tools by [dayjs](https://day.js.org/)
 - 🏘️ test-framework by [vitest](https://vitest.dev/)
 - 🐙 unit-test by [@testing-library](https://testing-library.com/)
-- 🎭 e2e-test by [cypress](https://www.cypress.io/)
+- 🎭 e2e-test by [playwright](https://playwright.dev/)
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)
 - 🔍 dependencies checker by [madge](https://github.com/pahen/madge)
 - 📊 test-coverage by [c8](https://github.com/bcoe/c8)
@@ -52,20 +52,24 @@ that's all, happy hacking!
 
 ### Script 🪃
 
-- dev
-- mock
-- build
-- preview
-- test
-- e2e-test
-- lint
-- coverage
-- storybook
-- build-storybook
-- check-circular
-- output-dependencies
-- remove-node_modules
-- upgrade-node_modules
+- vite:dev
+- server:mock
+- vite:build
+- vite:preview
+- ut:terminal
+- ut:ui
+- ut:coverage
+- e2e:terminal
+- e2e:ui
+- e2e:install
+- eslint:fix
+- ut:coverage
+- storybook:dev
+- storybook:build
+- madge:check-circular
+- madge:output-dependencies
+- node_modules:remove
+- node_modules:upgrade
 
 ### Catalog 📑
 

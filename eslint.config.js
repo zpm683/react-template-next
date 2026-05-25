@@ -329,13 +329,11 @@ export default defineConfig(
     },
   },
   {
-    name: "cypress-config",
-    files: ["cypress/**/*.{js,jsx,ts,tsx}", "src/e2e/**/*.cy.{js,jsx,ts,tsx}"],
+    name: "playwright-config",
+    files: ["playwright.config.ts", "src/e2e/**/*.e2e.{js,jsx,ts,tsx}"],
     languageOptions: {
       globals: {
         ...globals.browser,
-        cy: "readonly",
-        Cypress: "readonly",
         describe: "readonly",
         it: "readonly",
         expect: "readonly",
@@ -343,6 +341,7 @@ export default defineConfig(
         before: "readonly",
         afterEach: "readonly",
         after: "readonly",
+        test: "readonly",
       },
     },
   },

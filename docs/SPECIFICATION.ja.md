@@ -29,9 +29,6 @@ vscodeを使用して開発する場合は、推奨プラグインを必ずイ�
 │   ├─launch.json         # VSCodeデバッグ設定
 │   └─settings.json       # VSCodeワークスペース設定
 ├─coverage                # テストカバレッジレポート出力ディレクトリ
-├─cypress                 # Cypressエンドツーエンドテスト関連ディレクトリ
-│   ├─fixtures            # テスト用のモックデータ
-│   └─support             # Cypressサポートファイル（カスタムコマンドなど）
 ├─dist                    # プロジェクト構築出力ディレクトリ
 ├─node_modules            # プロジェクト依存パッケージディレクトリ
 ├─public                  # 公共静的資源ディレクトリ
@@ -43,7 +40,7 @@ vscodeを使用して開発する場合は、推奨プラグインを必ずイ�
 ├─.prettierignore         # Prettierフォーマット無視ファイル
 ├─.prettierrc             # Prettierフォーマット設定ファイル
 ├─architecture.png        # プロジェクトアーキテクチャ図
-├─cypress.config.ts       # Cypressテスト設定ファイル
+├─playwright.config.ts    # Playwrightテスト設定ファイル
 ├─dependencies.svg        # 依存関係可視化図
 ├─eslint.config.js        # ESLintコード規範設定ファイル
 ├─index.html              # プロジェクト入口HTMLファイル
@@ -147,8 +144,8 @@ vscodeを使用して開発する場合は、推奨プラグインを必ずイ�
 - 🐙 unit-test by [@testing-library](https://testing-library.com/)  
   【コンポーネントテストツール】—— ユーザー中心のテスト方法を提供し、コンポーネントの動作に焦点を当て、実装の詳細に依存しない。
 
-- 🎭 e2e-test by [cypress](https://www.cypress.io/)  
-  【エンドツーエンドテスト】—— cypressはブラウザの自動化テストに使用され、実際のユーザー操作をシミュレートし、アプリケーションの全体的な機能を保証。
+- 🎭 e2e-test by [playwright](https://playwright.dev/)  
+  【エンドツーエンドテスト】—— playwrightはブラウザの自動化テストに使用され、実際のユーザー操作をシミュレートし、アプリケーションの全体的な機能を保証。
 
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)  
   【コード規範とフォーマット】—— eslintはコード品質チェックに使用され、prettierはコードスタイルの統一に使用。

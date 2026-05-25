@@ -17,6 +17,8 @@ dist-ssr
 *.local
 storybook-static
 stats.html
+playwright-report
+test-results
 
 # Lock files
 package-lock.json
