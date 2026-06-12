@@ -10,16 +10,29 @@ import {
 
 import { useMount, useUnmount } from "ahooks";
 
+import { getBaseURL } from "./env";
+
 // Type definition for a fallback render function used in error boundaries
 type FallbackRender = (props: FallbackProps) => React.ReactNode;
 
 // Type definition for router configuration
-type RouterConfig = {
-  path: string; // Path for the route
+type BaseRouterConfig = {
   element: React.ReactNode; // React component to render for the route
   isPrivate?: boolean; // Optional flag indicating if the route is private
-  index?: boolean; // Optional flag indicating if the route is an index route
 };
+
+type PathRouterConfig = BaseRouterConfig & {
+  path: string; // Path for the route
+  index?: false;
+};
+
+type IndexRouterConfig = BaseRouterConfig & {
+  index: true; // Optional flag indicating if the route is an index route
+  path?: never;
+};
+
+// Type definition for router configuration
+type RouterConfig = PathRouterConfig | IndexRouterConfig;
 
 // Interface definition for the app builder, containing various methods for building the app
 interface IAppBuilder {
@@ -34,9 +47,9 @@ interface IAppBuilder {
   /** Add a provider component */
   provider<P>(provider: React.ComponentType<P>, props?: P): this;
   /** Set a function to execute when the component mounts */
-  mount(fn: () => void | Promise<void>): this;
+  mount(fn: () => void): this;
   /** Set a function to execute when the component unmounts */
-  unmount(fn: () => void | Promise<void>): this;
+  unmount(fn: () => void): this;
   /** Build the final component and provide state management methods */
   build(): React.FC;
 }
@@ -77,8 +90,8 @@ const AppBuilder = (options?: Options) => {
   const providers: { component: React.ComponentType<any>; props: any }[] = [];
 
   // Arrays to store mount and unmount effect functions
-  const mountEffects: (() => void | Promise<void>)[] = [];
-  const unmountEffects: (() => void | Promise<void>)[] = [];
+  const mountEffects: Array<() => void> = [];
+  const unmountEffects: Array<() => void> = [];
 
   // Default 404 page and error boundary page
   let notFoundPage: React.ReactNode = <div>404 Not Found</div>;
@@ -107,7 +120,7 @@ const AppBuilder = (options?: Options) => {
       return this;
     },
     page(config) {
-      pages.push({ isPrivate: false, index: false, ...config });
+      pages.push({ isPrivate: false, ...config });
       return this;
     },
     provider<P>(provider: React.ComponentType<P>, props?: P) {
@@ -159,32 +172,39 @@ const AppBuilder = (options?: Options) => {
         return (
           <ErrorBoundary fallbackRender={fallbackRender}>
             <RouterByType
-              basename={
-                options?.notUseBaseName
-                  ? undefined
-                  : import.meta.env.ENV_APP_BASE_URL
-              }
+              basename={options?.notUseBaseName ? undefined : getBaseURL()}
             >
               {renderProviders(
                 <Routes>
-                  {pages.map(({ path, isPrivate, element, index }) => (
-                    <Route
-                      key={path}
-                      path={path}
-                      index={index}
-                      element={
-                        isPrivate ? (
-                          hasAuth() ? (
-                            element
-                          ) : (
-                            <Navigate to={redirectPath} />
-                          )
-                        ) : (
-                          element
-                        )
-                      }
-                    />
-                  ))}
+                  {pages.map((page, index) => {
+                    const element = page.isPrivate ? (
+                      hasAuth() ? (
+                        page.element
+                      ) : (
+                        <Navigate to={redirectPath} />
+                      )
+                    ) : (
+                      page.element
+                    );
+
+                    if (page.index) {
+                      return (
+                        <Route
+                          key={`index-route-${index}`}
+                          index
+                          element={element}
+                        />
+                      );
+                    }
+
+                    return (
+                      <Route
+                        key={page.path}
+                        path={page.path}
+                        element={element}
+                      />
+                    );
+                  })}
                   <Route path="*" element={notFoundPage} />
                 </Routes>,
               )}

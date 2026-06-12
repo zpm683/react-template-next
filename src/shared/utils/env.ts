@@ -1,6 +1,6 @@
 import { toBool } from "./functions";
 
-const getBaseURL = () => import.meta.env.BASE_URL;
+const getBaseURL = () => import.meta.env.ENV_APP_BASE_URL;
 
 const getApiServerURL = () => import.meta.env.ENV_API_URL;
 

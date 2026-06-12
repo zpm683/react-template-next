@@ -1,6 +1,16 @@
+---
+agent: agent
+name: React开发者规约
+description: 这是一个React开发者规约，旨在规范React项目的开发流程、代码风格和最佳实践，以提高代码质量和团队协作效率。
+argument-hint: 请根据以下规约编写和审查React项目代码，确保遵守所有规范和最佳实践。
+---
+
 # React开发者规约
 
-> 版本：V1.0 更新日：（2025/07/27）
+> 版本：V2026.0612  
+> 适用范围：基于 Vite 8 + React 19 + TypeScript 6 的前端项目
+
+说明：本文件是详细规范与示例手册；高频且始终生效的短规则统一维护在 .github/copilot-instructions.md。若两者表述层级不同，以 copilot-instructions 的常驻约束为入口，以本文件的详细解释为展开依据。
 
 ## 1.工程规范
 
@@ -24,71 +34,55 @@
 ├─.storybook              # Storybook 配置目录，用于组件开发和文档
 │   ├─main.ts             # Storybook 主配置文件
 │   └─preview.ts          # Storybook 预览配置文件
-├─.vscode                 # VSCode 编辑器相关配置
-│   ├─extensions.json     # 推荐的 VSCode 插件列表
-│   ├─launch.json         # VSCode 调试配置
-│   └─settings.json       # VSCode 工作区设置
-├─coverage                # 测试覆盖率报告输出目录
-├─dist                    # 项目构建输出目录
-├─node_modules            # 项目依赖包目录
+├─coverage                # 单元测试覆盖率报告输出目录
+├─docs                    # 文档目录
+├─playwright-report       # Playwright HTML 报告输出目录
 ├─public                  # 公共静态资源目录
-├─storybook-static        # Storybook 静态构建输出目录
-├─.env.development        # 开发环境环境变量配置
-├─.env.production         # 生产环境环境变量配置
-├─.gitignore              # Git 忽略文件配置
-├─.madgerc                # Madge（依赖可视化工具）配置文件
-├─.prettierignore         # Prettier 格式化忽略文件
-├─.prettierrc             # Prettier 格式化配置文件
-├─architecture.png        # 项目架构图
-├─playwright.config.ts    # Playwright 测试配置文件
-├─dependencies.svg        # 依赖关系可视化图
+├─src                     # 项目源代码目录
+│   ├─app                 # 主业务代码目录
+│   │   ├─@types          # 类型定义目录
+│   │   ├─apis            # API 请求相关代码
+│   │   ├─assets          # 静态资源（如图片、字体等）
+│   │   ├─components      # 组件目录
+│   │   │   ├─atoms       # 原子级基础组件
+│   │   │   ├─molecules   # 分子级组合组件
+│   │   │   ├─organisms   # 组织级复杂组件
+│   │   │   └─index.ts    # 组件导出入口
+│   │   ├─constants       # 常量定义目录
+│   │   ├─features        # 业务功能模块目录
+│   │   ├─hooks           # 自定义 React Hooks 目录
+│   │   ├─layout          # 页面布局组件目录
+│   │   ├─stores          # 状态管理相关目录
+│   │   ├─themes          # 主题和样式相关目录
+│   │   ├─utils           # 工具函数目录
+│   │   ├─app.tsx         # 应用主入口组件
+│   │   └─index.ts        # 应用主入口文件
+│   ├─e2e                 # Playwright E2E 测试目录
+│   ├─shared              # 跨业务/全局共享代码目录
+│   │   ├─components      # 可复用的共享组件
+│   │   ├─hooks           # 可复用的共享 Hooks
+│   │   └─utils           # 可复用的共享工具函数
+│   ├─test                # 单元测试相关目录
+│   │   └─setup.ts        # 测试环境初始化文件
+│   ├─index.css           # 全局样式文件
+│   └─index.tsx           # React 应用入口文件
+├─test-results            # Playwright 原始测试结果目录
+├─types                   # 全局类型声明目录
 ├─eslint.config.js        # ESLint 代码规范配置文件
 ├─index.html              # 项目入口 HTML 文件
-├─LICENSE                 # 项目许可证
-├─package-lock.json       # npm 依赖锁定文件
 ├─package.json            # 项目依赖及脚本配置文件
+├─playwright.config.ts    # Playwright 测试配置文件
 ├─README.md               # 项目说明文档
-├─SPECIFICATION.cn.md     # 项目开发规范（中文）
-├─SPECIFICATION.en.md     # 项目开发规范（英文）
-├─SPECIFICATION.ja.md     # 项目开发规范（日文）
 ├─stats.html              # 构建统计分析页面
 ├─tsconfig.json           # TypeScript 编译配置文件
-├─vite.config.ts          # Vite 构建工具配置文件
-└─src                     # 项目源代码目录
-    ├─app                 # 主业务代码目录
-    │   ├─@types          # 类型定义目录
-    │   │   ├─models      # 数据模型类型定义
-    │   │   └─views       # 视图相关类型定义
-    │   ├─apis            # API 请求相关代码
-    │   ├─assets          # 静态资源（如图片、字体等）
-    │   ├─components      # 组件目录
-    │   │   ├─atoms       # 原子级基础组件
-    │   │   ├─molecules   # 分子级组合组件
-    │   │   ├─organisms   # 组织级复杂组件
-    │   │   └─index.ts    # 组件导出入口
-    │   ├─constants       # 常量定义目录
-    │   ├─features        # 业务功能模块目录
-    │   ├─hooks           # 自定义 React Hooks 目录
-    │   ├─layouts         # 页面布局组件目录
-    │   ├─stores          # 状态管理相关目录
-    │   ├─themes          # 主题和样式相关目录
-    │   ├─utils           # 工具函数目录
-    │   ├─app.tsx         # 应用主入口组件
-    │   └─index.ts        # 应用主入口文件
-    ├─e2e                 # 端到端（E2E）测试目录
-    ├─shared              # 跨业务/全局共享代码目录
-    │   ├─components      # 可复用的共享组件
-    │   ├─hooks           # 可复用的共享 Hooks
-    │   └─utils           # 可复用的共享工具函数
-    ├─test                # 单元测试相关目录
-    │   └─setup.ts        # 测试环境初始化文件
-    ├─env.d.ts            # 环境变量类型声明
-    ├─index.css           # 全局样式文件
-    ├─index.tsx           # React 应用入口文件
-    └─reset.d.ts          # 类型重置或补充声明文件
+└─vite.config.ts          # Vite 构建工具配置文件
 ```
 
+补充约定：以上目录以当前工程现状为准，像 coverage、playwright-report、storybook-static、test-results 这类产物目录通常不需要手动维护，也不应作为业务代码落点。
+
 ### 1.2 下面是脚手架中已经添加过的常用库，如果不能满足需求，请自行添加其他第三方库或调整现有库。
+
+当前工程基线版本：Vite 8、React 19、TypeScript 6、MUI 9、Storybook 10、Vitest 4、Playwright 1.60。
 
 - 🏗️ bootstrap by [vite](https://vitejs.dev/)  
   【Vite 启动项目】—— 用于快速搭建和开发现代前端项目的构建工具，启动速度极快。
@@ -145,7 +139,7 @@
   【组件测试工具】—— 提供一套以用户为中心的测试方法，专注于组件行为而非实现细节。
 
 - 🎭 e2e-test by [playwright](https://playwright.dev/)  
-  【端到端测试】—— playwright 用于自动化浏览器测试，模拟真实用户操作，保障应用整体功能。
+  【端到端测试】—— Playwright 用于自动化浏览器测试，支持多浏览器、网络拦截、追踪回放与更稳定的 CI 集成。
 
 - 👀 lint-code by [eslint](https://eslint.org) & [prettier](https://prettier.io/)  
   【代码规范与格式化】—— eslint 用于代码质量检查，prettier 用于统一代码风格。
@@ -153,8 +147,8 @@
 - 🔍 dependencies checker by [madge](https://github.com/pahen/madge)  
   【依赖关系分析】—— madge 可视化项目依赖关系，帮助发现循环依赖等问题。
 
-- 📊 test-coverage by [c8](https://github.com/bcoe/c8)  
-  【测试覆盖率统计】—— c8 用于统计测试覆盖率，帮助提升测试完整性。
+- 📊 test-coverage by [@vitest/coverage-v8](https://vitest.dev/guide/coverage.html)  
+  【测试覆盖率统计】—— 通过 Vitest 原生覆盖率能力输出覆盖率报告，帮助提升测试完整性。
 
 - 🚀 performance monitoring by [react-scan](https://react-scan.com/)  
   【性能监控】—— react-scan 用于分析和监控 React 应用的性能瓶颈。
@@ -162,8 +156,23 @@
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)  
   【提交校验】—— husky 用于 Git 钩子自动化，lint-staged 用于提交前代码检查和修复。
 
-- 🧩 other tools:[json-server](https://github.com/typicode/json-server) [radash](https://github.com/toss/radash/tree/main)
-  【其他工具】—— json-server 用于快速搭建 mock API，radash 提供实用函数集合
+- 🧩 other tools:[json-server](https://github.com/typicode/json-server) [radash](https://github.com/toss/radash/tree/main) [qs](https://github.com/ljharb/qs) [svgr](https://react-svgr.com/)
+  【其他工具】—— json-server 用于快速搭建 mock API，radash 提供实用函数集合，qs 处理查询参数，SVGR 负责将 SVG 转成 React 组件。
+
+### 1.2.1 当前常用脚本
+
+- 本地开发：`npm run vite:dev`
+- 启动 Mock 服务：`npm run server:mock`
+- 单元测试：`npm run ut:terminal`
+- 单元测试 UI：`npm run ut:ui`
+- 单元测试覆盖率：`npm run ut:coverage`
+- E2E 测试：`npm run e2e:terminal`
+- E2E 测试 UI：`npm run e2e:ui`
+- 安装 Playwright 浏览器：`npm run e2e:install`
+- Storybook：`npm run storybook:dev`
+- 生产构建：`npm run vite:build`
+
+不要在规约、文档或自动化提示词中继续使用已经不存在的 `npm run dev`、`npm run test`、`npm run build` 作为默认命令；如需执行，请优先引用 package.json 中的真实脚本名。
 
 ### 1.3 src/app文件的夹结构
 
@@ -231,6 +240,7 @@ JS/TS中的变量只要export就能在任意位置import。
 - index.ts没导出的变量一律视为当前文件夹中的内部变量。
 - index.ts中导出的变量被其他人使用发现BUG时，由此变量的创建者者负责。（因为是允许对外公开的变量，原则可以被复用）
 - index.ts中没导出的变量，被其他人绕开index.ts直接从源文件导入导致BUG的，此变量的创建者不负责。（因为是内部变量，原则上不能被复用）
+- components文件夹中如果按照了原子化分层，只需要components层有一个index.ts即可，atoms，molecules，organisms文件夹下无需index.ts。
 
 ### 1.5 不能从深的层级导入变量，必须通过index.ts导入
 
@@ -294,6 +304,12 @@ const A = () => {
 
 ### 1.8 避免直接使用console.log，而是使用项目专用的封装后的Logger
 
+### 1.9 环境变量使用规范
+
+- 敏感信息(API密钥/Token)禁止硬编码,必须使用 `.env` 文件
+- 环境变量命名格式: `VITE_XXX_YYY`
+- `.env.local` 文件禁止提交到Git(已在 `.gitignore` 中)
+
 ## 2.命名规范
 
 ### 2.1 文件夹/文件一般使用 xxx-yyy-zzz 的格式命名`
@@ -314,6 +330,18 @@ const A = () => {
 
 ### 2.8 类型都是大驼峰命名（XxxxYyyyZzzz）
 
+### 2.9 布尔变量命名
+
+- 使用 `is/has/should/can` 前缀 (第三方库导出的变量除外)
+- ✅ Good: `isLoading`, `hasError`, `shouldUpdate`
+- ❌ Bad: `loading`, `error`, `update`
+
+### 2.10 事件处理函数命名
+
+- 使用 `handle`或者 `h` 前缀 + 事件类型
+- ✅ Good: `handleClick`, `hClick`, `handleSubmit`, `handleChange`
+- ❌ Bad: `click`, `submit`, `onChange`
+
 ## 3.组件规范
 
 ### 3.1 使用函数式组件，避免使用class式组件
@@ -329,7 +357,7 @@ const A = () => {
 
 ```tsx
 // 标准Demo改
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 // 组件的props接口
 type XxxxProps = {
@@ -382,6 +410,51 @@ export const Xxxx: FC<XxxxProps> = ({
 此外一定要保证key的局部唯一性，如果无法保证可以使用map方法的index，
 但是如果UI上有排序或者拖拽动作时务必不要使用map方法的index作为key。
 
+### 3.6 Props默认值处理
+
+- 可选Props必须在参数解构时赋初值(而非组件内部判断)
+- ✅ Good: `const Xxx: FC<Props> = ({ size = 'medium' }) => ...`
+- ❌ Bad: `const size = props.size || 'medium'`
+
+### 3.7 条件渲染规范
+
+- 简单条件使用 `&&` 或三元运算符
+- 复杂条件必须提取为 `renderXxx` 函数
+- 禁止在JSX中写复杂逻辑(超过3行)
+
+### 3.8 列表渲染规范
+
+- 必须使用稳定的 `key`(禁止 `Math.random()`)
+- 数据有增删改时禁止使用 `index` 作为key
+- 推荐使用数据的唯一标识(`id/uuid`)
+
+### 3.9 性能优化时机
+
+- 仅在以下情况优化:
+  1. React DevTools Profiler显示明显性能问题
+  2. FPS低于30(使用react-scan监控)
+  3. 用户反馈明显卡顿
+
+### 3.10 优化手段
+
+- `React.memo`: 仅用于纯展示组件(props不频繁变化)
+- `useMemo`: 仅用于昂贵计算(遍历大数组/复杂对象转换)
+- `useCallback`: 仅用于传递给子组件的回调(子组件用了memo时)
+
+### 3.11 children 类型定义规范
+
+- 如果组件接收 children，必须显式声明类型
+- ✅ Good:
+  ```tsx
+  type LayoutProps = {
+    children: React.ReactNode; // 推荐
+  };
+  ```
+- ❌ Bad:
+  ```tsx
+  const Layout: FC = ({ children }) => ... // children 类型隐式 any
+  ```
+
 ## 4.类型定义规范
 
 ### 4.1 类型中的注解需采用多行格式（为了更好的提示效果）
@@ -410,6 +483,38 @@ type UserRes = {
 
 > 什么时候必要？
 > 如果需要定义一个可以被他人拓展的类型，又或者要拓展已有interface类型时才使用interface
+
+### 4.3 避免使用 `any`
+
+- 生产代码中禁止使用 `any`(除非确实无法推断)
+- 使用 `unknown` 替代,配合类型守卫(type guard)
+- 临时开发阶段可用 `// @ts-ignore`,但上线前必须移除
+
+### 4.4 泛型使用规范
+
+- 泛型参数命名: 单字母(`T/K/V`)或语义化(`TData/TError`)
+- 复杂泛型必须添加注释说明约束条件
+
+### 4.5 禁止使用enum关键字，而是用 as const + 类型别名的方式定义枚举类型
+
+```ts
+// bad
+enum Color {
+  RED = "red",
+  GREEN = "green",
+  BLUE = "blue",
+}
+```
+
+```ts
+// good
+const COLOR = {
+  RED: "red",
+  GREEN: "green",
+  BLUE: "blue",
+} as const;
+type Color = (typeof COLOR)[keyof typeof COLOR];
+```
 
 ## 5.各文件夹内部规范
 
@@ -486,6 +591,18 @@ const postUsersAPI = async (req: Req) => {
 export { getUsersAPI, postUsersAPI };
 ```
 
+### 5.2.1 错误处理规范
+
+- API调用必须使用 `try-catch` 或全局错误拦截器
+- 错误信息需要统一格式化(通过 `axiosInstance` 拦截器)
+- 禁止在API层直接 `alert/console.error`
+
+### 5.2.2 API命名补充
+
+- 命名格式: `[请求方法][资源名]API`
+- ✅ Good: `getUsersAPI`, `postLoginAPI`, `deleteUserAPI`
+- ❌ Bad: `getUsers`, `login`, `delUser`
+
 ### 5.3 关于assets文件夹
 
 - 一般用来放置静态资源 (图片，SVG组件，音频，视频，字体文件等)
@@ -519,7 +636,7 @@ type PayProps = {
     value: string;
   };
 };
-const PayTitle = ({ data }:PayProps) => {
+const PayTitle: React.FC<PayProps> = ({ data }) => {
   return (
     <div>
       Title: <div>{data.title}</div>
@@ -538,7 +655,7 @@ type TitleProps = {
   title: string;
   subTitle: string;
 };
-const Title = ({ title, subTitle }:TitleProps) => {
+const Title: React.FC<TitleProps> = ({ title, subTitle }) => {
   return (
     <div>
       <div>{title}</div>
@@ -586,7 +703,7 @@ export { APP_PATH };
 - 存放页面（features级别）整体布局类组件
 - 组件必须具有 children props
 
-### 5.9 关于layout文件夹
+### 5.9 关于stores文件夹
 
 - 存放页面（features级别）全局状态
 - 各修改状态的方法需要是纯函数
@@ -596,12 +713,33 @@ export { APP_PATH };
 - 存放全局皮肤
 - 对于Mui来说，需要优先使用皮肤定义标准设计
 
-### 5.10 关于utils文件夹
+### 5.11 关于utils文件夹
 
 - 存放各种工具函数
 - 都是纯函数
 - 避免使用全局状态（推荐以参数形式传入）
 
-### 5.11 关于app.tsx
+## 6. 注释规范
 
-- 使用AppBuilder创建
+### 6.1 何时写注释
+
+- 复杂业务逻辑(算法/特殊处理)
+- 临时方案/技术债务(需标注TODO/FIXME)
+- 公共API/组件(必须用JSDoc格式)
+
+### 6.2 何时不写注释
+
+- 代码本身已足够清晰(好的命名 > 注释)
+- 无意义的重复(❌ Bad: `// 设置用户名 setUserName(xxx)`)
+
+## 7. 安全规范
+
+### 7.1 避免XSS攻击
+
+- 用户输入必须转义(使用 `DOMPurify` 或React默认转义)
+- 禁止使用 `dangerouslySetInnerHTML`(除非必要且已消毒)
+
+### 7.2 敏感数据处理
+
+- Token存储优先使用 `httpOnly Cookie`(而非localStorage)
+- 前端禁止存储密码/密钥等敏感信息

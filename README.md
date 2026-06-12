@@ -29,6 +29,7 @@
 - 🚀 performance monitoring by [react-scan](https://react-scan.com/)
 - 🕵️ commit-check by [husky](https://typicode.github.io/husky/#/) & [lint-staged](https://github.com/okonet/lint-staged)
 - 🧩 other tools:[json-server](https://github.com/typicode/json-server) [radash](https://github.com/toss/radash/tree/main) & [promise-pool](https://www.npmjs.com/package/@supercharge/promise-pool)
+- 🤖 AI skill by [mattpocock-skills](https://github.com/mattpocock/skills) & [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
 ### About Env 🌌
 

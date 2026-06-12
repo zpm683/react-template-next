@@ -15,7 +15,6 @@ dayjs.extend(relativeTime);
 
 /**
  * Gets the current date and time as a Dayjs object.
- * @returns {dayjs.Dayjs} The current date and time.
  */
 export const now = () => {
   return dayjs();

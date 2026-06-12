@@ -3,14 +3,13 @@
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "trailing",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
     "source.fixAll.eslint": "explicit"
   },
   "workbench.colorCustomizations": {
     "editorWhitespace.foreground": "#fbff00"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -85,5 +84,5 @@
     "XXX"
   ],
   "todo-tree.general.statusBar": "total",
-  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^@mui/[^/]+$"]
+  "js/ts.preferences.autoImportSpecifierExcludeRegexes": ["^@mui/[^/]+$"]
 }
