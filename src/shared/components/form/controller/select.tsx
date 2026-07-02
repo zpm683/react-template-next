@@ -1,32 +1,36 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { Checkbox, CheckboxProps, Label } from "../../../atoms";
+import { MenuItemProps } from "@mui/material/MenuItem";
+
+import { Label } from "../../lable";
+import { Select, SelectProps } from "../../select";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
 
-type CheckboxControllerProps = CommonControllerProps &
-  OmitRenderProps<CheckboxProps>;
+type SelectControllerProps = CommonControllerProps & {
+  options: MenuItemProps[];
+} & OmitRenderProps<SelectProps>;
 
-const CheckboxController: React.FC<CheckboxControllerProps> = ({
+const SelectController: React.FC<SelectControllerProps> = ({
   name,
-  children,
+  options,
   errorHelperProps,
   disabled,
   label,
   required,
   hiddenErrorHelper = false,
   labelProps,
-  ...checkboxProps
+  ...selectProps
 }) => {
   const { control } = useFormContext();
-  const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
-  const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
-
   const {
     field,
     fieldState: { error },
   } = useController({ name, control });
+
+  const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
+  const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
 
   return (
     <>
@@ -36,14 +40,13 @@ const CheckboxController: React.FC<CheckboxControllerProps> = ({
         alignWidth={alignWidth}
         {...labelProps}
       >
-        <Checkbox
+        <Select
           {...field}
-          {...checkboxProps}
+          size="small"
+          options={options}
           disabled={disabled}
-          checked={field.value === true}
-        >
-          {children}
-        </Checkbox>
+          {...selectProps}
+        />
       </Label>
       {showErrorHelper && (
         <ErrorHelper
@@ -56,5 +59,5 @@ const CheckboxController: React.FC<CheckboxControllerProps> = ({
   );
 };
 
-export { CheckboxController };
-export type { CheckboxControllerProps };
+export { SelectController };
+export type { SelectControllerProps };

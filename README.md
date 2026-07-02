@@ -9,7 +9,7 @@
 - 🧬 language by [typescript](https://www.typescriptlang.org/)
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
 - 🖼️ component by [mui](https://mui.com/)
-- ⚛️ design-pattern by [atomic design](https://atomicdesign.bradfrost.com/)
+- 🧱 component architecture by `ui / features / pages`
 - 📔 ui component explorer by [storybook](https://storybook.js.org/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
 - 📝 form by [react-hook-form](https://react-hook-form.com/) & form-validation by [zod](https://zod.dev/)
@@ -43,11 +43,11 @@
 ### How to use? 🤨
 
 Step1：clone this project  
- Step2：npm i  
- Step3：npm run dev  
- Step4：make your components in src/\*\*  
- Step5: make your test code in test/\*\*  
- Step6: run scripts (build/preview/test/lint/...)
+Step2：npm i  
+Step3：npm run vite:dev  
+Step4：make your code in `src/app/ui`、`src/app/features`、`src/app/pages` or `src/shared/**`  
+Step5: make your test code in `src/test/**`  
+Step6: run scripts (build/preview/test/lint/...)
 
 that's all, happy hacking!
 
@@ -63,12 +63,12 @@ that's all, happy hacking!
 - e2e:terminal
 - e2e:ui
 - e2e:install
-- eslint:fix
+- lint:eslint-fix
 - ut:coverage
 - storybook:dev
 - storybook:build
-- madge:check-circular
-- madge:output-dependencies
+- lint:check-circular
+- lint:output-dependencies
 - node_modules:remove
 - node_modules:upgrade
 
@@ -106,17 +106,14 @@ that's all, happy hacking!
     ├─app
     | ├─@types
     | ├─apis
-    | ├─components
-    | | ├─atoms
-    | | ├─molecules
-    | | ├─organisms
-    | | └─index.ts
     | ├─constants
     | ├─hooks
     | ├─layouts
     | ├─features
+    | ├─pages
     | ├─stores
     | ├─themes
+    | ├─ui
     | ├─utils
     | ├─app.tsx
     | └─index.ts
@@ -133,6 +130,10 @@ that's all, happy hacking!
 ```
 
 ### About React-Clean-Architecture 🧐
+
+- `ui`: 纯组件，和业务无关，贴近 UI，不能有业务实现
+- `features`: 允许业务实现的组件，但不能调用 API
+- `pages`: 页面级别，负责 API 调用，并组合 `ui` 和 `features`
 
 ![react-clean-architecture](./docs/architecture.png)
 

@@ -1,35 +1,33 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { MenuItemProps } from "@mui/material/MenuItem";
-
-import { Label, Select, SelectProps } from "../../../atoms";
+import { Checkbox, CheckboxProps } from "../../checkbox";
+import { Label } from "../../lable";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
 
-type SelectControllerProps = CommonControllerProps & {
-  options: MenuItemProps[];
-} & OmitRenderProps<SelectProps>;
+type CheckboxControllerProps = CommonControllerProps &
+  OmitRenderProps<CheckboxProps>;
 
-const SelectController: React.FC<SelectControllerProps> = ({
+const CheckboxController: React.FC<CheckboxControllerProps> = ({
   name,
-  options,
+  children,
   errorHelperProps,
   disabled,
   label,
   required,
   hiddenErrorHelper = false,
   labelProps,
-  ...selectProps
+  ...checkboxProps
 }) => {
   const { control } = useFormContext();
+  const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
+  const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
+
   const {
     field,
     fieldState: { error },
   } = useController({ name, control });
-
-  const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
-  const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
 
   return (
     <>
@@ -39,13 +37,14 @@ const SelectController: React.FC<SelectControllerProps> = ({
         alignWidth={alignWidth}
         {...labelProps}
       >
-        <Select
+        <Checkbox
           {...field}
-          size="small"
-          options={options}
+          {...checkboxProps}
           disabled={disabled}
-          {...selectProps}
-        />
+          checked={field.value === true}
+        >
+          {children}
+        </Checkbox>
       </Label>
       {showErrorHelper && (
         <ErrorHelper
@@ -58,5 +57,5 @@ const SelectController: React.FC<SelectControllerProps> = ({
   );
 };
 
-export { SelectController };
-export type { SelectControllerProps };
+export { CheckboxController };
+export type { CheckboxControllerProps };

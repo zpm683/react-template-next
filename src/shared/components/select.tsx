@@ -27,7 +27,7 @@ export const Select = forwardRef<unknown, SelectProps>(
           }}
         >
           {options.map((props, index) => (
-            <MenuItem {...props} key={index} />
+            <MenuItem key={index} {...props} />
           ))}
         </MuiSelect>
       </FormControl>

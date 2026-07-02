@@ -1,30 +1,31 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import RadioGroup, { RadioGroupProps } from "@mui/material/RadioGroup";
-
-import { Label, Radio, RadioProps } from "../../../atoms";
+import { Label } from "../../lable";
+import { TextField, TextFieldProps } from "../../text-field";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
 
-type RadioGroupControllerProps = CommonControllerProps & {
-  options: RadioProps[];
-} & OmitRenderProps<RadioGroupProps>;
+type TextFieldControllerProps = CommonControllerProps & {
+  /** 計量単位 */
+  unit?: React.ReactNode;
+} & OmitRenderProps<TextFieldProps>;
 
-const RadioGroupController: React.FC<RadioGroupControllerProps> = ({
+const TextFieldController: React.FC<TextFieldControllerProps> = ({
   name,
-  options,
-  errorHelperProps,
-  disabled,
-  required,
   label,
-  hiddenErrorHelper = false,
   labelProps,
-  ...radioGroupProps
+  errorHelperProps,
+  required,
+  disabled,
+  maxLength,
+  hiddenErrorHelper = false,
+  unit,
+  ...textFieldProps
 }) => {
   const { control } = useFormContext();
   const {
-    field,
+    field: { onChange, ref: controlRefCallBack, ...restRenderProps },
     fieldState: { error },
   } = useController({ name, control });
 
@@ -39,11 +40,16 @@ const RadioGroupController: React.FC<RadioGroupControllerProps> = ({
         alignWidth={alignWidth}
         {...labelProps}
       >
-        <RadioGroup {...field} {...radioGroupProps}>
-          {options.map((el, index) => (
-            <Radio {...el} key={index} disabled={disabled} />
-          ))}
-        </RadioGroup>
+        <TextField
+          {...restRenderProps}
+          {...textFieldProps}
+          maxLength={maxLength}
+          inputRef={controlRefCallBack}
+          onValChange={onChange}
+          disabled={disabled}
+          size="small"
+        />
+        <span>{unit}</span>
       </Label>
       {showErrorHelper && (
         <ErrorHelper
@@ -56,5 +62,5 @@ const RadioGroupController: React.FC<RadioGroupControllerProps> = ({
   );
 };
 
-export { RadioGroupController };
-export type { RadioGroupControllerProps };
+export { TextFieldController };
+export type { TextFieldControllerProps };

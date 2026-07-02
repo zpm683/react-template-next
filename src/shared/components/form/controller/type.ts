@@ -1,6 +1,6 @@
 import { ControllerRenderProps } from "react-hook-form";
 
-import { LabelProps } from "../../../atoms";
+import { LabelProps } from "../../lable";
 import { ErrorHelperProps } from "../error-helper";
 
 /**

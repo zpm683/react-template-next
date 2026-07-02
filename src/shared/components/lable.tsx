@@ -21,7 +21,12 @@ export const Label = ({
 }: LabelProps) => {
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "8px",
+      }}
     >
       {!hiddenLable && (
         <Typography
@@ -35,6 +40,7 @@ export const Label = ({
             <span
               style={{
                 paddingRight: "4px",
+                color: "red",
               }}
             >
               *

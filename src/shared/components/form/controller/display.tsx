@@ -1,6 +1,6 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { Label, LabelProps } from "../../../atoms";
+import { Label, LabelProps } from "../../lable";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps } from "./type";

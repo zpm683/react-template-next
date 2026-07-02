@@ -16,7 +16,7 @@ applyTo: "**"
 ## 目录与导入
 
 - 默认只在 src 下写业务代码，遵循现有目录结构，不随意调整脚手架配置
-- app 目录当前使用纵向分层：@types、apis、assets、components、constants、features、hooks、layout、stores、themes、utils
+- app 目录当前使用纵向分层：@types、apis、assets、constants、features、hooks、layouts、pages、stores、themes、ui、utils
 - 每个对外提供能力的目录必须有 index.ts 作为唯一导出入口
 - 禁止深层导入，优先通过同层 index.ts 暴露后的路径导入
 - 同层级导入使用相对路径，跨层级导入使用绝对路径
@@ -35,7 +35,9 @@ applyTo: "**"
 
 - 使用函数式组件，遵循单一职责和 SOLID 原则
 - 组件内部代码顺序遵循 hooks、handler、effect、render
-- components 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
+- ui 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
+- features 层允许承载业务实现，但禁止直接调用 API；需要通过 hooks、props、状态编排完成交互
+- pages 层负责页面级 API 调用，并组合 ui 和 features
 - 可选 props 在参数解构时提供默认值，不在函数体内兜底
 - JSX 中不要写复杂逻辑，复杂条件提取为 renderXxx 函数
 - 列表渲染必须使用稳定 key；有增删改时禁止使用 index 和随机值

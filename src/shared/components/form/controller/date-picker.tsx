@@ -1,36 +1,45 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import { TextField, TextFieldProps } from "../../../atoms";
-import { Label } from "../../../atoms";
+import dayjs from "dayjs";
+
+import { toDateString } from "shared/utils";
+
+import { DatePicker, DatePickerProps } from "../../date-picker";
+import { Label } from "../../lable";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
 
-type TextFieldControllerProps = CommonControllerProps & {
-  /** 計量単位 */
-  unit?: React.ReactNode;
-} & OmitRenderProps<TextFieldProps>;
+export type DatePickerControllerProps = CommonControllerProps &
+  OmitRenderProps<DatePickerProps>;
 
-const TextFieldController: React.FC<TextFieldControllerProps> = ({
+const DatePickerController: React.FC<DatePickerControllerProps> = ({
   name,
-  label,
-  labelProps,
   errorHelperProps,
-  required,
   disabled,
-  maxLength,
+  label,
+  required,
   hiddenErrorHelper = false,
-  unit,
-  ...textFieldProps
+  labelProps,
+  ...datePickerProps
 }) => {
   const { control } = useFormContext();
   const {
-    field: { onChange, ref: controlRefCallBack, ...restRenderProps },
+    field: { value, onChange, ref: controlRefCallBack, ...restRenderProps },
     fieldState: { error },
   } = useController({ name, control });
 
   const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
   const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
+
+  const handleChange = (e: dayjs.Dayjs | null) => {
+    if (!e) {
+      onChange(null);
+      return;
+    }
+
+    onChange(toDateString(e.toDate()));
+  };
 
   return (
     <>
@@ -40,16 +49,14 @@ const TextFieldController: React.FC<TextFieldControllerProps> = ({
         alignWidth={alignWidth}
         {...labelProps}
       >
-        <TextField
-          {...restRenderProps}
-          {...textFieldProps}
-          maxLength={maxLength}
-          inputRef={controlRefCallBack}
-          onValChange={onChange}
+        <DatePicker
+          value={value !== null ? dayjs(value) : null}
+          onChange={handleChange}
           disabled={disabled}
-          size="small"
+          inputRef={controlRefCallBack}
+          {...restRenderProps}
+          {...datePickerProps}
         />
-        <span>{unit}</span>
       </Label>
       {showErrorHelper && (
         <ErrorHelper
@@ -62,5 +69,4 @@ const TextFieldController: React.FC<TextFieldControllerProps> = ({
   );
 };
 
-export { TextFieldController };
-export type { TextFieldControllerProps };
+export { DatePickerController };

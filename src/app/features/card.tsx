@@ -6,7 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import { Header } from "../molecules";
+import { Header } from "app/ui";
 
 type CardProps = {
   id: number;

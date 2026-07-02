@@ -8,8 +8,8 @@ import { Show, useDialoger } from "shared/components";
 
 import { getUsers } from "app/apis";
 import { LOGO_PNG, VITE_LOGO } from "app/assets";
-import { Card } from "app/components";
-import { Flex } from "app/layout";
+import { Card } from "app/features";
+import { Flex } from "app/layouts";
 import { useGlobalStore } from "app/stores";
 
 const Home = () => {

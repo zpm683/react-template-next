@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import { Title } from "../atoms";
+import { Title } from "./title";
 
 type HeaderProps = {
   title?: string;

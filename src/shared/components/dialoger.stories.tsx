@@ -4,7 +4,7 @@ import type { Meta } from "@storybook/react";
 import { Dialoger, DialogerProvider, useDialoger } from "./dialogger";
 
 const meta = {
-  title: "molecules/Dialoger",
+  title: "shared/Dialoger",
   component: Dialoger,
 } satisfies Meta<typeof Dialoger>;
 

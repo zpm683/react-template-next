@@ -39,11 +39,13 @@ model: GPT-5.4 (copilot)
 - [ ] 目录层级遵循脚手架模板，新增业务也按规范分层
 - [ ] 每个目录都配有 `index.ts` 管理导出；外部引用只通过该入口
 - [ ] 同层级 import 用相对路径，跨层级使用绝对路径（`app/...`、`shared/...`）
-- [ ] `components`、`hooks` 等文件夹的子文件夹可以不定义 `index.ts`
+- [ ] 纯内部子目录可以不定义 `index.ts`；对外提供能力的目录必须通过 `index.ts` 暴露
 
 ### 1.2 模块职责
 
-- [ ] `features` 层负责业务流程，可调用 API、全局状态
+- [ ] `ui` 层只负责纯展示，与业务无关，不调用 API，不直接访问全局状态
+- [ ] `features` 层允许业务实现，但不能调用 API
+- [ ] `pages` 层负责 API 调用，并组合 `ui` 和 `features`
 - [ ] 复杂逻辑拆分至 `hooks` 或子模块
 - [ ] `constants` 目录集中定义配置/映射，使用 `as const` 防止被改写
 - [ ] 静态资源统一由 `assets/index.ts` 具名导出；SVG/图片引入路径清晰
@@ -148,9 +150,7 @@ addMonthToDate(1, date);
 ```typescript
 // ❌ 不好的 - 混合了多个抽象级别
 function parseBetterJSAlternative(code) {
-  const REGEXES = [
-    /* ... */
-  ];
+  const REGEXES = [/* ... */];
   const statements = code.split(" ");
   const tokens = [];
   REGEXES.forEach((REGEX) => {
@@ -166,9 +166,7 @@ function parseBetterJSAlternative(code) {
 
 // ✅ 好的 - 每个函数一个抽象级别
 function tokenize(code) {
-  const REGEXES = [
-    /* ... */
-  ];
+  const REGEXES = [/* ... */];
   const statements = code.split(" ");
   const tokens = [];
   REGEXES.forEach((REGEX) => {
@@ -343,7 +341,7 @@ if (isDOMNodePresent(node)) {
 ### 3.2 类型定义
 
 - [ ] 优先使用 `type`，除非需要扩展用 `interface`
-- [ ] 根组件文件名与目录同名（`features/login/login.tsx`）
+- [ ] 根组件文件名与目录同名（如 `pages/home/home.tsx`、`features/user-panel/user-panel.tsx`）
 - [ ] 临时文件前缀 `_`
 
 ### 3.3 变量质量
@@ -431,15 +429,16 @@ function createMicrobrewery(breweryName = "Hipster Brew Co.") {
 
 - [ ] 使用函数式组件
 - [ ] 代码顺序: `hooks` → `handlers` → `effects` → `render`
-- [ ] `components` 目录仅含纯 UI，无 API 调用、无全局状态直接访问
+- [ ] `ui` 目录仅含纯 UI，无 API 调用、无全局状态直接访问
+- [ ] `features` 目录可承载业务实现，但不得直接发起 API 请求
+- [ ] `pages` 目录负责页面级数据获取与 `ui` / `features` 组合
 - [ ] 业务逻辑通过回调向上暴露
 
 ### 4.2 组件设计
 
-- [ ] 遵循 Atomic Design（`atoms` → `molecules` → `organisms`）
 - [ ] 遵循 SOLID 原则（组件和 hooks 都是函数）
 - [ ] 层级命名准确，公共组件有 Storybook 示例
-- [ ] `components` 中的组件遵循正确依赖顺序: `atoms` → `molecules` → `organisms`
+- [ ] `ui` / `features` / `pages` 三层职责清晰，不跨层越权
 
 ### 4.3 样式管理
 
@@ -507,7 +506,7 @@ async function loadData() {
 
 - [ ] XxxxProps类型中的所有字段都需要注释
 - [ ] XxxxProps类型中的字段使用 `/** ... */` 块注释（不用 `//` 单行注释）
-- [ ] `features`/`components`/`config`/`constants`/`hooks`/`tools`/`utils` 定义时，方法名上方使用块注释解释功能
+- [ ] `ui`/`features`/`pages`/`config`/`constants`/`hooks`/`tools`/`utils` 定义时，方法名上方使用块注释解释功能
 
 ### 7.2 注释质量
 

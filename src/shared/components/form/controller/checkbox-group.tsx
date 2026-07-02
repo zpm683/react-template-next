@@ -2,7 +2,8 @@ import { useController, useFormContext } from "react-hook-form";
 
 import FormGroup, { FormGroupProps } from "@mui/material/FormGroup";
 
-import { Checkbox, CheckboxProps, Label } from "../../../atoms";
+import { Checkbox, CheckboxProps } from "../../checkbox";
+import { Label } from "../../lable";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
@@ -53,14 +54,20 @@ const CheckboxGroupController = ({
           onChange={handleChange}
           {...rest}
           {...formGroupProps}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+          }}
         >
           {options.map((op) => (
             <Checkbox
-              {...op}
               key={op.value as string}
               value={op.value}
               checked={checkedVal.includes(op.value as string)}
               disabled={disabled}
+              {...op}
             />
           ))}
         </FormGroup>

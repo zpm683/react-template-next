@@ -1,44 +1,36 @@
 import { useController, useFormContext } from "react-hook-form";
 
-import dayjs from "dayjs";
+import RadioGroup, { RadioGroupProps } from "@mui/material/RadioGroup";
 
-import { toDateString } from "shared/utils";
-
-import { DatePicker, DatePickerProps, Label } from "../../../atoms";
+import { Label } from "../../lable";
+import { Radio, RadioProps } from "../../radio";
 import { ErrorHelper } from "../error-helper";
 import { useFormUiContext } from "../form-context";
 import { CommonControllerProps, OmitRenderProps } from "./type";
 
-export type DatePickerControllerProps = CommonControllerProps &
-  OmitRenderProps<DatePickerProps>;
+type RadioGroupControllerProps = CommonControllerProps & {
+  options: RadioProps[];
+} & OmitRenderProps<RadioGroupProps>;
 
-const DatePickerController: React.FC<DatePickerControllerProps> = ({
+const RadioGroupController: React.FC<RadioGroupControllerProps> = ({
   name,
+  options,
   errorHelperProps,
   disabled,
-  label,
   required,
+  label,
   hiddenErrorHelper = false,
   labelProps,
-  ...datePickerProps
+  ...radioGroupProps
 }) => {
   const { control } = useFormContext();
   const {
-    field: { value, onChange, ref: controlRefCallBack, ...restRenderProps },
+    field,
     fieldState: { error },
   } = useController({ name, control });
 
   const { alignWidth, hiddenAllErrorHelper = false } = useFormUiContext();
   const showErrorHelper = !hiddenErrorHelper && !hiddenAllErrorHelper;
-
-  const handleChange = (e: dayjs.Dayjs | null) => {
-    if (!e) {
-      onChange(null);
-      return;
-    }
-
-    onChange(toDateString(e.toDate()));
-  };
 
   return (
     <>
@@ -48,14 +40,20 @@ const DatePickerController: React.FC<DatePickerControllerProps> = ({
         alignWidth={alignWidth}
         {...labelProps}
       >
-        <DatePicker
-          value={value !== null ? dayjs(value) : null}
-          onChange={handleChange}
-          disabled={disabled}
-          inputRef={controlRefCallBack}
-          {...restRenderProps}
-          {...datePickerProps}
-        />
+        <RadioGroup
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+          {...field}
+          {...radioGroupProps}
+        >
+          {options.map((el, index) => (
+            <Radio key={index} disabled={disabled} {...el} />
+          ))}
+        </RadioGroup>
       </Label>
       {showErrorHelper && (
         <ErrorHelper
@@ -68,4 +66,5 @@ const DatePickerController: React.FC<DatePickerControllerProps> = ({
   );
 };
 
-export { DatePickerController };
+export { RadioGroupController };
+export type { RadioGroupControllerProps };

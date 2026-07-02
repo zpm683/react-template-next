@@ -7,10 +7,10 @@ import type { Meta } from "@storybook/react";
 import { z } from "zod";
 
 import { Form, FormItem } from ".";
-import { CheckboxProps, RadioProps } from "../../atoms";
+import { CheckboxProps, RadioProps } from "..";
 
 const meta = {
-  title: "organisms/Form",
+  title: "shared/Form",
   component: Form,
 } satisfies Meta<typeof Form>;
 
@@ -90,9 +90,11 @@ export const Basic = () => {
       form={form}
       onSuccess={handleSuccess}
       onError={handleError}
-      display="flex"
-      flexDirection="column"
-      width="50%"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "50%",
+      }}
       alignWidth={170}
     >
       <FormItem.TextField

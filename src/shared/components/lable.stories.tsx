@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Label } from "./lable";
 
 const meta = {
-  title: "atoms/Label",
+  title: "shared/Label",
   component: Label,
 } satisfies Meta<typeof Label>;
 
