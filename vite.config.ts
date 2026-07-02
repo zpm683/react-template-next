@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 
 import babel from "@rolldown/plugin-babel";
+import tailwindcss from "@tailwindcss/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import colors from "picocolors";
 import { visualizer } from "rollup-plugin-visualizer";
@@ -29,6 +30,7 @@ export default defineConfig(({ mode }) => {
       svgr({
         include: "**/*.svg",
       }),
+      tailwindcss(),
       {
         ...visualizer(),
         apply: "build",

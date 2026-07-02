@@ -8,8 +8,8 @@
 - ⚛️ framework by [react](https://beta.reactjs.org/)
 - 🧬 language by [typescript](https://www.typescriptlang.org/)
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)
-- 🖼️ component by [mui](https://mui.com/)
-- ⚛️ design-pattern by [atomic design](https://atomicdesign.bradfrost.com/)
+- 🖼️ component by [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/) + [tailwindcss](https://tailwindcss.com/)
+- ⚛️ component-layer by `ui` / `features` / `pages`
 - 📔 ui component explorer by [storybook](https://storybook.js.org/)
 - 🎛️ state-management by [zustand](https://zustand-demo.pmnd.rs/)
 - 📝 form by [react-hook-form](https://react-hook-form.com/) & form-validation by [zod](https://zod.dev/)
@@ -43,11 +43,11 @@
 ### How to use? 🤨
 
 Step1：clone this project  
- Step2：npm i  
- Step3：npm run dev  
- Step4：make your components in src/\*\*  
- Step5: make your test code in test/\*\*  
- Step6: run scripts (build/preview/test/lint/...)
+Step2：npm i  
+Step3：npm run vite:dev  
+Step4：make your code in src/app/ui, src/app/features, src/app/pages or src/shared/**  
+Step5: make your test code in test/**  
+Step6: run scripts (build/preview/test/lint/...)
 
 that's all, happy hacking!
 
@@ -106,17 +106,14 @@ that's all, happy hacking!
     ├─app
     | ├─@types
     | ├─apis
-    | ├─components
-    | | ├─atoms
-    | | ├─molecules
-    | | ├─organisms
-    | | └─index.ts
     | ├─constants
     | ├─hooks
     | ├─layouts
     | ├─features
+    | ├─pages
     | ├─stores
     | ├─themes
+    | ├─ui
     | ├─utils
     | ├─app.tsx
     | └─index.ts

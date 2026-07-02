@@ -43,17 +43,14 @@ argument-hint: 请根据以下规约编写和审查React项目代码，确保遵
 │   │   ├─@types          # 类型定义目录
 │   │   ├─apis            # API 请求相关代码
 │   │   ├─assets          # 静态资源（如图片、字体等）
-│   │   ├─components      # 组件目录
-│   │   │   ├─atoms       # 原子级基础组件
-│   │   │   ├─molecules   # 分子级组合组件
-│   │   │   ├─organisms   # 组织级复杂组件
-│   │   │   └─index.ts    # 组件导出入口
 │   │   ├─constants       # 常量定义目录
 │   │   ├─features        # 业务功能模块目录
 │   │   ├─hooks           # 自定义 React Hooks 目录
-│   │   ├─layout          # 页面布局组件目录
+│   │   ├─layouts         # 页面布局组件目录
+│   │   ├─pages           # 页面级目录，负责路由页面与 API 调用
 │   │   ├─stores          # 状态管理相关目录
 │   │   ├─themes          # 主题和样式相关目录
+│   │   ├─ui              # 纯 UI 组件目录
 │   │   ├─utils           # 工具函数目录
 │   │   ├─app.tsx         # 应用主入口组件
 │   │   └─index.ts        # 应用主入口文件
@@ -82,7 +79,7 @@ argument-hint: 请根据以下规约编写和审查React项目代码，确保遵
 
 ### 1.2 下面是脚手架中已经添加过的常用库，如果不能满足需求，请自行添加其他第三方库或调整现有库。
 
-当前工程基线版本：Vite 8、React 19、TypeScript 6、MUI 9、Storybook 10、Vitest 4、Playwright 1.60。
+当前工程基线版本：Vite 8、React 19、TypeScript 6、shadcn/ui 4、Radix UI、Tailwind CSS 4、Storybook 10、Vitest 4、Playwright 1.60。
 
 - 🏗️ bootstrap by [vite](https://vitejs.dev/)  
   【Vite 启动项目】—— 用于快速搭建和开发现代前端项目的构建工具，启动速度极快。
@@ -96,11 +93,11 @@ argument-hint: 请根据以下规约编写和审查React项目代码，确保遵
 - 🏭 build by tsc & [vite](https://github.com/vitejs/vite)  
   【tsc & Vite 构建】—— tsc 用于 TypeScript 编译，Vite 用于开发和生产环境的高效构建。
 
-- 🖼️ component by [mui](https://mui.com/)  
-  【MUI 组件库】—— 基于 Material Design 的 React 组件库，快速搭建美观一致的 UI。
+- 🖼️ component by [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/) + [tailwindcss](https://tailwindcss.com/)  
+  【shadcn / Radix / Tailwind 组件体系】—— 基于可组合原语和样式工具构建 UI，兼顾可维护性、可访问性与定制能力。
 
-- ⚛️ design-pattern by [atomic design](https://atomicdesign.bradfrost.com/)  
-  【原子化设计模式】—— 组件分层思想，将 UI 拆分为原子、分子、有机体等层级，提升复用性和可维护性。
+- ⚛️ component-layer by `ui` / `features` / `pages`  
+  【三层组件分层】—— `ui` 负责纯展示，`features` 负责业务实现但不直接调用 API，`pages` 负责页面装配与 API 调用。
 
 - 📔 ui component explorer by [storybook](https://storybook.js.org/)  
   【Storybook 组件开发与文档】—— 独立开发、测试和展示 UI 组件的工具，支持组件文档和交互演示。
@@ -189,24 +186,22 @@ app 文件夹中的结构虽然比较自由，但一般有两种推荐的结构�
 ├─apis
 ├─assets
 │  └─img
-├─components
-│  ├─atoms
-│  ├─molecules
-│  └─organisms
 ├─constants
 ├─features
 ├─hooks
-├─layout
+├─layouts
+├─pages
 ├─stores
 ├─themes
+├─ui
 └─utils
 ```
 
 #### 横向（一般针对大型项目，有2种及以上的不同业务时推荐采用）
 
 特点是基于业务规划文件夹。  
- 一般有一个公共文件夹（@common）用来存放业务间可以复用的组件或者方法又或者全局配置，  
- 各业务文件夹内部再按照纵向分层（可以按照实际情况缺少某些文件夹）。
+一般有一个公共文件夹（@common）用来存放业务间可以复用的组件或者方法又或者全局配置，  
+各业务文件夹内部再按照纵向分层（可以按照实际情况缺少某些文件夹）。
 
 ```
 ├─@common
@@ -240,19 +235,19 @@ JS/TS中的变量只要export就能在任意位置import。
 - index.ts没导出的变量一律视为当前文件夹中的内部变量。
 - index.ts中导出的变量被其他人使用发现BUG时，由此变量的创建者者负责。（因为是允许对外公开的变量，原则可以被复用）
 - index.ts中没导出的变量，被其他人绕开index.ts直接从源文件导入导致BUG的，此变量的创建者不负责。（因为是内部变量，原则上不能被复用）
-- components文件夹中如果按照了原子化分层，只需要components层有一个index.ts即可，atoms，molecules，organisms文件夹下无需index.ts。
+- `ui`、`features`、`pages` 等对外提供能力的目录都应通过各自的 `index.ts` 管理导出。
 
 ### 1.5 不能从深的层级导入变量，必须通过index.ts导入
 
 ```ts
 // Bad!
-import { Xxx } from "./components/xxx";
-import { Yyy } from "app/components/yyy";
-import { Zzz } from "app/@common/components";
+import { Xxx } from "./ui/xxx";
+import { Yyy } from "app/features/yyy";
+import { Zzz } from "app/@common/ui";
 
 // Good!
-import { Xxx } from "./components";
-import { Yyy } from "app/components";
+import { Xxx } from "./ui";
+import { Yyy } from "app/features";
 import { Zzz } from "app/@common";
 
 ```
@@ -261,25 +256,25 @@ import { Zzz } from "app/@common";
 
 此规则是为了区分是外部变量还是内部变量，方便后续review和维护。
 
-eg:当components中的组件A需要使用components中的组件B时（同层级）
+eg:当ui中的组件A需要使用ui中的组件B时（同层级）
 
 ```tsx
 // Bad!
-import { B } from "app/components";
+import { B } from "app/ui";
 
 const A = () => {
     return <B/>
 };
 
 // Good!
-import { B } from "./components";
+import { B } from "./ui";
 
 const A = () => {
     return <B/>
 };
 ```
 
-eg:当components中的组件A需要使用constants中的常量B时（跨层级）
+eg:当ui中的组件A需要使用constants中的常量B时（跨层级）
 
 ```tsx
 // Bad!
@@ -615,18 +610,15 @@ import LOGO_PNG from "./img/logo.png";
 export { LOGO_PNG };
 ```
 
-### 5.4 关于components文件夹
+### 5.4 关于ui文件夹
 
-- 采用原子设计模型（有atoms/molecules/organisms文件夹）
-- 原子是最小的组件，分子由原子组成，组织由分子和原子组成
-- 组件要尽量抽象并语义化，定义组件和考虑其Props时尽量脱离业务，要从UI的角度考虑。(organisms层除外)
-- 组件命名时，末尾一般都是一种UI上的概念（dialog, panel, card ....）
-- components文件夹中的组件都应该是纯粹的组件
-- components文件夹中的组件禁止调用任何API
-- components文件夹中的组件禁止调用任何全局状态（需要通过props传递）
-- components文件夹中的组件禁止处理任何业务性逻辑 （需要以回调（事件）的形式对外公开参数）
-- 设计组件的时随时考虑高复用，高封装度（props简单，尽量把状态留在组件内部）
-- Props类型中的各项目应该有详细的注解
+- `ui` 文件夹存放纯展示组件与贴近 UI 的通用交互组件
+- `ui` 中的组件命名应尽量语义化，优先从 UI 概念命名（dialog, panel, card, title 等）
+- `ui` 中的组件禁止调用任何 API
+- `ui` 中的组件禁止承载业务实现
+- `ui` 中的组件禁止直接访问全局状态（需要通过 props 传递）
+- 设计组件时随时考虑高复用、高封装度
+- Props 类型中的各项目应该有详细的注解
 
 ```tsx
 //// BAD 基于业务命名
@@ -687,33 +679,38 @@ export { APP_PATH };
 
 ### 5.6 关于features文件夹
 
-- 此文件夹是存放各业务的顶级组件（页面级别/独立dialog级别等）
-- 可以调用API
+- 此文件夹是存放允许承载业务实现的组件或业务片段
 - 可以使用全局状态
+- 禁止直接调用 `apis`
 - 如果一个组件中存在多个业务，则需要按照业务封装在hooks文件夹中
-- 所用子组件都应该出现在components文件夹中，而不是二级子文件夹
-- 处理各种业务行为
+- 可以组合 `ui` 组件并处理各种业务行为
 
-### 5.7 关于hooks文件夹
+### 5.7 关于pages文件夹
+
+- 此文件夹存放页面级组件
+- `pages` 负责 API 调用、页面装配、路由入口和页面级数据流编排
+- `pages` 组合 `ui` 与 `features`
+
+### 5.8 关于hooks文件夹
 
 - 存放自定义hooks（业务/不通用的UI用hooks）
 
-### 5.8 关于layout文件夹
+### 5.9 关于layouts文件夹
 
 - 存放页面（features级别）整体布局类组件
 - 组件必须具有 children props
 
-### 5.9 关于stores文件夹
+### 5.10 关于stores文件夹
 
 - 存放页面（features级别）全局状态
 - 各修改状态的方法需要是纯函数
 
-### 5.10 关于themes文件夹
+### 5.11 关于themes文件夹
 
-- 存放全局皮肤
-- 对于Mui来说，需要优先使用皮肤定义标准设计
+- 存放全局设计 token、主题配置或样式常量
+- 不与特定 UI 库强耦合，避免再写只服务于单一组件库的主题壳
 
-### 5.11 关于utils文件夹
+### 5.12 关于utils文件夹
 
 - 存放各种工具函数
 - 都是纯函数

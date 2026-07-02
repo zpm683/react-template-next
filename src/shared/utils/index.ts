@@ -4,3 +4,4 @@ export * from "./axios-instance";
 export * from "./create-immer-store";
 export * from "./app-builder";
 export * from "./day";
+export * from "./tailwind";

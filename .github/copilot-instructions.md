@@ -9,14 +9,14 @@ applyTo: "**"
 
 ## 适用基线
 
-- 当前工程基线：Vite 8、React 19、TypeScript 6、MUI 9、Storybook 10、Vitest 4、Playwright 1.60
+- 当前工程基线：Vite 8、React 19、TypeScript 6、shadcn/ui 4、Radix UI、Tailwind CSS 4、Storybook 10、Vitest 4、Playwright 1.60
 - 本文件只放高频、稳定、必须始终生效的规则
 - 详细示例、反例和分层说明统一放在 .github/prompts/specification.prompt.md
 
 ## 目录与导入
 
 - 默认只在 src 下写业务代码，遵循现有目录结构，不随意调整脚手架配置
-- app 目录当前使用纵向分层：@types、apis、assets、components、constants、features、hooks、layout、stores、themes、utils
+- app 目录当前使用纵向分层：@types、apis、assets、constants、features、hooks、layouts、pages、stores、themes、ui、utils
 - 每个对外提供能力的目录必须有 index.ts 作为唯一导出入口
 - 禁止深层导入，优先通过同层 index.ts 暴露后的路径导入
 - 同层级导入使用相对路径，跨层级导入使用绝对路径
@@ -35,7 +35,10 @@ applyTo: "**"
 
 - 使用函数式组件，遵循单一职责和 SOLID 原则
 - 组件内部代码顺序遵循 hooks、handler、effect、render
-- components 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
+- 项目组件层级按 `ui`、`features`、`pages` 三层划分
+- `ui` 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
+- `features` 层允许业务实现，但禁止直接调用 `apis`
+- `pages` 层负责页面级 API 调用、路由入口和 `ui`/`features` 组合
 - 可选 props 在参数解构时提供默认值，不在函数体内兜底
 - JSX 中不要写复杂逻辑，复杂条件提取为 renderXxx 函数
 - 列表渲染必须使用稳定 key；有增删改时禁止使用 index 和随机值
@@ -50,7 +53,7 @@ applyTo: "**"
 
 ## 样式、状态与 API
 
-- 除公共全局样式外，优先使用 CSS Modules、MUI sx 或其他模块化样式方案，避免新增非模块化 CSS
+- 除公共全局样式外，优先使用 CSS Modules、Tailwind utilities、组件级样式封装等模块化样式方案，避免新增非模块化 CSS
 - stores 中的状态更新方法应保持纯函数风格
 - apis 层只负责请求封装，不处理排序、聚合和业务编排
 - API 命名使用 [请求方法][资源名]API 格式，例如 getUsersAPI

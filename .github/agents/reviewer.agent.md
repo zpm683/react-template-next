@@ -43,7 +43,9 @@ model: GPT-5.4 (copilot)
 
 ### 1.2 模块职责
 
-- [ ] `features` 层负责业务流程，可调用 API、全局状态
+- [ ] `ui` 层是纯展示组件，和业务无关，不直接调用 API，不承载业务实现
+- [ ] `features` 层允许业务实现与业务交互编排，但不能直接调用 `apis`
+- [ ] `pages` 层负责页面级组合、路由入口与 API 调用，组合 `ui` 和 `features`
 - [ ] 复杂逻辑拆分至 `hooks` 或子模块
 - [ ] `constants` 目录集中定义配置/映射，使用 `as const` 防止被改写
 - [ ] 静态资源统一由 `assets/index.ts` 具名导出；SVG/图片引入路径清晰
@@ -148,9 +150,7 @@ addMonthToDate(1, date);
 ```typescript
 // ❌ 不好的 - 混合了多个抽象级别
 function parseBetterJSAlternative(code) {
-  const REGEXES = [
-    /* ... */
-  ];
+  const REGEXES = [/* ... */];
   const statements = code.split(" ");
   const tokens = [];
   REGEXES.forEach((REGEX) => {
@@ -166,9 +166,7 @@ function parseBetterJSAlternative(code) {
 
 // ✅ 好的 - 每个函数一个抽象级别
 function tokenize(code) {
-  const REGEXES = [
-    /* ... */
-  ];
+  const REGEXES = [/* ... */];
   const statements = code.split(" ");
   const tokens = [];
   REGEXES.forEach((REGEX) => {
@@ -431,19 +429,21 @@ function createMicrobrewery(breweryName = "Hipster Brew Co.") {
 
 - [ ] 使用函数式组件
 - [ ] 代码顺序: `hooks` → `handlers` → `effects` → `render`
-- [ ] `components` 目录仅含纯 UI，无 API 调用、无全局状态直接访问
-- [ ] 业务逻辑通过回调向上暴露
+- [ ] `ui` 目录仅含纯 UI，无 API 调用、无全局状态直接访问、无业务实现
+- [ ] `features` 目录可以承载业务实现，但不得直接调用 `apis`
+- [ ] `pages` 目录负责 API 调用与页面装配，不把请求逻辑下沉到 `ui` / `features`
+- [ ] 业务逻辑优先通过 props、hooks 或明确的状态依赖暴露
 
 ### 4.2 组件设计
 
-- [ ] 遵循 Atomic Design（`atoms` → `molecules` → `organisms`）
 - [ ] 遵循 SOLID 原则（组件和 hooks 都是函数）
 - [ ] 层级命名准确，公共组件有 Storybook 示例
-- [ ] `components` 中的组件遵循正确依赖顺序: `atoms` → `molecules` → `organisms`
+- [ ] 组件层级遵循 `ui` → `features` → `pages` 的职责边界
+- [ ] `ui` 优先从 UI 语义命名，`features` 优先从业务能力命名，`pages` 优先从页面语义命名
 
 ### 4.3 样式管理
 
-- [ ] 使用模块化方案（`*.module.css` / `sx` / `styled`）
+- [ ] 使用模块化方案（`*.module.css` / Tailwind utilities / 组件级样式封装）
 - [ ] 禁止裸 `*.css` 注入全局
 
 ### 4.4 列表渲染
