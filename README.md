@@ -33,12 +33,12 @@
 
 ### About Env 🌌
 
-- Node version need >=18
+- Node version need >=24
 - If you want to run the "output-dependencies" script, you must have [graphviz](<(https://graphviz.gitlab.io/download/)>) installed.
 
 ### Other version 🔗
 
-- [css by tailwind](https://github.com/zpm683/react-template-next/tree/tailwindcss)
+- [css by tailwind](https://github.com/zpm683/react-template-next/tree/shadcn_ui)
 
 ### How to use? 🤨
 
