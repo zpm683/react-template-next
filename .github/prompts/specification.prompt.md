@@ -302,7 +302,8 @@ const A = () => {
 ### 1.9 环境变量使用规范
 
 - 敏感信息(API密钥/Token)禁止硬编码,必须使用 `.env` 文件
-- 环境变量命名格式: `VITE_XXX_YYY`
+- 环境变量命名格式: `ENV_XXX_YYY`
+- Vite 环境变量前缀通过 `vite.config.ts` 的 `envPrefix` 显式声明
 - `.env.local` 文件禁止提交到Git(已在 `.gitignore` 中)
 
 ## 2.命名规范
@@ -515,50 +516,51 @@ type Color = (typeof COLOR)[keyof typeof COLOR];
 
 ### 5.1 关于@types文件夹
 
-- 公共类型或 API 接口需要在@types 文件夹内定义 (xxx.d.ts)
-- xxx.d.ts 内需要定义为模块。 规则: declare module "文件夹名.文件名"
+- 公共类型或 API 接口需要在@types 文件夹内定义 (xxx.ts)
+- 类型文件使用普通 TS 模块，通过 `export type` 暴露，并由上层 `index.ts` 统一导出。
 
 ```ts
-// app/@types/models/login.d.ts
-declare module "models.login" {
-  type A = {};
-  type B = {};
-}
+// app/@types/models/login.ts
+type LoginA = unknown;
+type LoginB = unknown;
 
-// app/login/@types/models/auth.d.ts
-declare module "login.models.auth" {
-  type A = {};
-  type B = {};
-}
+export type { LoginA, LoginB };
+
+// app/login/@types/models/auth.ts
+type LoginAuthA = unknown;
+type LoginAuthB = unknown;
+
+export type { LoginAuthA, LoginAuthB };
 ```
 
 - @type/models 文件夹内放置 API 接口的定义文件，在其中指定 Request 与 Response 的类型
 
 ```ts
-// app/@types/models/login.d.ts
-declare module "models.login" {
-  type Request = {
-    id: string;
-    pass: string;
-  };
-  type Response = {
-    token: string;
-  };
-}
+// app/@types/models/login.ts
+type LoginRequest = {
+  id: string;
+  pass: string;
+};
+
+type LoginResponse = {
+  token: string;
+};
+
+export type { LoginRequest, LoginResponse };
 ```
 
 - @type/views 文件内可以定义一些UI上所需的共享类型
 
 ```ts
-// app/@types/views/login.d.ts
-declare module "views.login" {
-  form: {
-    xxx: string;
-  }
-}
+// app/@types/views/login.ts
+type LoginForm = {
+  xxx: string;
+};
+
+export type { LoginForm };
 ```
 
-- 如果有一些类型可以在models和views文件夹中公用，则在@type下定义一个common.d.ts
+- 如果有一些类型可以在models和views文件夹中公用，则在@type下定义一个common.ts
 - 没有共通性的类型可直接定义在自己对应的 .ts 或.tsx 文件内。
 
 ### 5.2 关于apis文件夹
@@ -571,16 +573,16 @@ declare module "views.login" {
 
 ```ts
 //  user.ts
-import { Req, Res } from "models.getUsers";
-
 import { axiosInstance } from "shared/utils";
 
-const getUsersAPI = async (req: Req) => {
-  return await axiosInstance.get<Res>("/users");
+import { GetUsersReq, GetUsersRes } from "app/@types";
+
+const getUsersAPI = async (req: GetUsersReq) => {
+  return await axiosInstance.get<GetUsersRes>("/users", req);
 };
 
-const postUsersAPI = async (req: Req) => {
-  return await axiosInstance.post<Res>("/users");
+const postUsersAPI = async (req: GetUsersReq) => {
+  return await axiosInstance.post<GetUsersRes>("/users", req);
 };
 
 export { getUsersAPI, postUsersAPI };

@@ -10,6 +10,19 @@ import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
+const restrictedMuiImports = { regex: "^@mui/[^/]+$" };
+const restrictedDeepImports = [
+  {
+    regex:
+      "^app/(?:@types|apis|assets|constants|features|hooks|layouts|pages|stores|themes|ui|utils)/.+",
+    message: "Use the public index.ts entry for cross-layer app imports.",
+  },
+  {
+    regex: "^shared/(?:components|hooks|utils)/.+",
+    message: "Use the public index.ts entry for cross-layer shared imports.",
+  },
+];
+
 export default defineConfig(
   {
     ignores: [
@@ -175,7 +188,7 @@ export default defineConfig(
       "no-restricted-imports": [
         "error",
         {
-          patterns: [{ regex: "^@mui/[^/]+$" }],
+          patterns: [restrictedMuiImports, ...restrictedDeepImports],
         },
       ],
 
@@ -229,6 +242,48 @@ export default defineConfig(
       //     "!src/app/@types/": "KEBAB_CASE",
       //   },
       // ],
+    },
+  },
+
+  {
+    name: "app-ui-boundaries",
+    files: ["src/app/ui/**/*.{js,jsx,ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            restrictedMuiImports,
+            ...restrictedDeepImports,
+            {
+              regex: "^app/(?:apis|stores)(?:$|/)",
+              message:
+                "UI components must stay presentational; pass data and state through props.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    name: "app-feature-boundaries",
+    files: ["src/app/features/**/*.{js,jsx,ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            restrictedMuiImports,
+            ...restrictedDeepImports,
+            {
+              regex: "^app/apis(?:$|/)",
+              message:
+                "Feature components must receive API data through hooks, props, or page orchestration.",
+            },
+          ],
+        },
+      ],
     },
   },
 
