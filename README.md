@@ -36,10 +36,6 @@
 - Node version need >=18
 - If you want to run the "output-dependencies" script, you must have [graphviz](<(https://graphviz.gitlab.io/download/)>) installed.
 
-### Other version 🔗
-
-- [css by tailwind](https://github.com/zpm683/react-template-next/tree/tailwindcss)
-
 ### How to use? 🤨
 
 Step1：clone this project  

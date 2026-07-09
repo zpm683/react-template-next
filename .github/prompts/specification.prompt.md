@@ -47,10 +47,10 @@ argument-hint: 请根据以下规约编写和审查React项目代码，确保遵
 │   │   ├─features        # 业务功能模块目录
 │   │   ├─hooks           # 自定义 React Hooks 目录
 │   │   ├─layouts         # 页面布局组件目录
-│   │   ├─pages           # 页面级目录，负责路由页面与 API 调用
+│   │   ├─pages           # 页面级组件目录（负责 API 调用与组合）
 │   │   ├─stores          # 状态管理相关目录
 │   │   ├─themes          # 主题和样式相关目录
-│   │   ├─ui              # 纯 UI 组件目录
+│   │   ├─ui              # 纯 UI 组件目录（禁止业务实现）
 │   │   ├─utils           # 工具函数目录
 │   │   ├─app.tsx         # 应用主入口组件
 │   │   └─index.ts        # 应用主入口文件
@@ -96,8 +96,8 @@ argument-hint: 请根据以下规约编写和审查React项目代码，确保遵
 - 🖼️ component by [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/) + [tailwindcss](https://tailwindcss.com/)  
   【shadcn / Radix / Tailwind 组件体系】—— 基于可组合原语和样式工具构建 UI，兼顾可维护性、可访问性与定制能力。
 
-- ⚛️ component-layer by `ui` / `features` / `pages`  
-  【三层组件分层】—— `ui` 负责纯展示，`features` 负责业务实现但不直接调用 API，`pages` 负责页面装配与 API 调用。
+- 🧱 component architecture by `ui / features / pages`  
+  【组件分层约定】—— `ui` 负责纯展示，`features` 允许业务实现但不能调用 API，`pages` 负责 API 调用并组合 `ui` 与 `features`。
 
 - 📔 ui component explorer by [storybook](https://storybook.js.org/)  
   【Storybook 组件开发与文档】—— 独立开发、测试和展示 UI 组件的工具，支持组件文档和交互演示。
@@ -177,7 +177,7 @@ app 文件夹中的结构虽然比较自由，但一般有两种推荐的结构�
 
 #### 纵向（一般针对小型项目）（脚手架默认）
 
-特点是基于前端中的技术领域规划文件夹
+特点是基于前端中的技术领域规划文件夹，其中组件相关层级统一采用 `ui / features / pages`。
 
 ```
 ├─@types
@@ -235,19 +235,19 @@ JS/TS中的变量只要export就能在任意位置import。
 - index.ts没导出的变量一律视为当前文件夹中的内部变量。
 - index.ts中导出的变量被其他人使用发现BUG时，由此变量的创建者者负责。（因为是允许对外公开的变量，原则可以被复用）
 - index.ts中没导出的变量，被其他人绕开index.ts直接从源文件导入导致BUG的，此变量的创建者不负责。（因为是内部变量，原则上不能被复用）
-- `ui`、`features`、`pages` 等对外提供能力的目录都应通过各自的 `index.ts` 管理导出。
+- 纯内部子目录可以不单独提供 index.ts，但凡对外提供能力的目录都必须通过 index.ts 暴露。
 
 ### 1.5 不能从深的层级导入变量，必须通过index.ts导入
 
 ```ts
 // Bad!
 import { Xxx } from "./ui/xxx";
-import { Yyy } from "app/features/yyy";
+import { Yyy } from "app/ui/yyy";
 import { Zzz } from "app/@common/ui";
 
 // Good!
 import { Xxx } from "./ui";
-import { Yyy } from "app/features";
+import { Yyy } from "app/ui";
 import { Zzz } from "app/@common";
 
 ```
@@ -302,7 +302,8 @@ const A = () => {
 ### 1.9 环境变量使用规范
 
 - 敏感信息(API密钥/Token)禁止硬编码,必须使用 `.env` 文件
-- 环境变量命名格式: `VITE_XXX_YYY`
+- 环境变量命名格式: `ENV_XXX_YYY`
+- Vite 环境变量前缀通过 `vite.config.ts` 的 `envPrefix` 显式声明
 - `.env.local` 文件禁止提交到Git(已在 `.gitignore` 中)
 
 ## 2.命名规范
@@ -515,50 +516,51 @@ type Color = (typeof COLOR)[keyof typeof COLOR];
 
 ### 5.1 关于@types文件夹
 
-- 公共类型或 API 接口需要在@types 文件夹内定义 (xxx.d.ts)
-- xxx.d.ts 内需要定义为模块。 规则: declare module "文件夹名.文件名"
+- 公共类型或 API 接口需要在@types 文件夹内定义 (xxx.ts)
+- 类型文件使用普通 TS 模块，通过 `export type` 暴露，并由上层 `index.ts` 统一导出。
 
 ```ts
-// app/@types/models/login.d.ts
-declare module "models.login" {
-  type A = {};
-  type B = {};
-}
+// app/@types/models/login.ts
+type LoginA = unknown;
+type LoginB = unknown;
 
-// app/login/@types/models/auth.d.ts
-declare module "login.models.auth" {
-  type A = {};
-  type B = {};
-}
+export type { LoginA, LoginB };
+
+// app/login/@types/models/auth.ts
+type LoginAuthA = unknown;
+type LoginAuthB = unknown;
+
+export type { LoginAuthA, LoginAuthB };
 ```
 
 - @type/models 文件夹内放置 API 接口的定义文件，在其中指定 Request 与 Response 的类型
 
 ```ts
-// app/@types/models/login.d.ts
-declare module "models.login" {
-  type Request = {
-    id: string;
-    pass: string;
-  };
-  type Response = {
-    token: string;
-  };
-}
+// app/@types/models/login.ts
+type LoginRequest = {
+  id: string;
+  pass: string;
+};
+
+type LoginResponse = {
+  token: string;
+};
+
+export type { LoginRequest, LoginResponse };
 ```
 
 - @type/views 文件内可以定义一些UI上所需的共享类型
 
 ```ts
-// app/@types/views/login.d.ts
-declare module "views.login" {
-  form: {
-    xxx: string;
-  }
-}
+// app/@types/views/login.ts
+type LoginForm = {
+  xxx: string;
+};
+
+export type { LoginForm };
 ```
 
-- 如果有一些类型可以在models和views文件夹中公用，则在@type下定义一个common.d.ts
+- 如果有一些类型可以在models和views文件夹中公用，则在@type下定义一个common.ts
 - 没有共通性的类型可直接定义在自己对应的 .ts 或.tsx 文件内。
 
 ### 5.2 关于apis文件夹
@@ -571,16 +573,16 @@ declare module "views.login" {
 
 ```ts
 //  user.ts
-import { Req, Res } from "models.getUsers";
-
 import { axiosInstance } from "shared/utils";
 
-const getUsersAPI = async (req: Req) => {
-  return await axiosInstance.get<Res>("/users");
+import { GetUsersReq, GetUsersRes } from "app/@types";
+
+const getUsersAPI = async (req: GetUsersReq) => {
+  return await axiosInstance.get<GetUsersRes>("/users", req);
 };
 
-const postUsersAPI = async (req: Req) => {
-  return await axiosInstance.post<Res>("/users");
+const postUsersAPI = async (req: GetUsersReq) => {
+  return await axiosInstance.post<GetUsersRes>("/users", req);
 };
 
 export { getUsersAPI, postUsersAPI };
@@ -612,12 +614,13 @@ export { LOGO_PNG };
 
 ### 5.4 关于ui文件夹
 
-- `ui` 文件夹存放纯展示组件与贴近 UI 的通用交互组件
-- `ui` 中的组件命名应尽量语义化，优先从 UI 概念命名（dialog, panel, card, title 等）
-- `ui` 中的组件禁止调用任何 API
-- `ui` 中的组件禁止承载业务实现
-- `ui` 中的组件禁止直接访问全局状态（需要通过 props 传递）
-- 设计组件时随时考虑高复用、高封装度
+- `ui` 文件夹中的组件都应该是纯粹的组件
+- 与业务无关，命名和抽象都尽量从 UI 语义出发
+- 禁止调用任何 API
+- 禁止直接访问任何全局状态（需要通过 props 传递）
+- 禁止处理业务性逻辑（需要以回调或受控 props 的形式对外公开）
+- 组件命名时，末尾一般都是一种 UI 上的概念（dialog, panel, card ...）
+- 设计组件时随时考虑高复用、高封装度（props 简单，尽量把 UI 状态留在组件内部）
 - Props 类型中的各项目应该有详细的注解
 
 ```tsx
@@ -679,25 +682,26 @@ export { APP_PATH };
 
 ### 5.6 关于features文件夹
 
-- 此文件夹是存放允许承载业务实现的组件或业务片段
-- 可以使用全局状态
-- 禁止直接调用 `apis`
-- 如果一个组件中存在多个业务，则需要按照业务封装在hooks文件夹中
-- 可以组合 `ui` 组件并处理各种业务行为
+- 此文件夹用于存放带业务含义的组件或功能块
+- 允许承载业务实现，可以使用全局状态、表单状态和业务 hooks
+- 禁止直接调用 API；需要由 `pages` 层完成数据获取后通过 props、context 或 hooks 注入
+- 如果一个组件中存在多个业务，则需要按照业务封装到 hooks 或子模块中
+- 处理各种业务行为，但不要越权承担页面级路由或接口编排
 
-### 5.7 关于pages文件夹
-
-- 此文件夹存放页面级组件
-- `pages` 负责 API 调用、页面装配、路由入口和页面级数据流编排
-- `pages` 组合 `ui` 与 `features`
-
-### 5.8 关于hooks文件夹
+### 5.7 关于hooks文件夹
 
 - 存放自定义hooks（业务/不通用的UI用hooks）
 
+### 5.8 关于pages文件夹
+
+- 存放页面级组件
+- 负责 API 调用、页面级数据编排和路由入口
+- 组合 `ui` 与 `features`
+- 不要把通用 UI 抽象直接留在 `pages` 中，能够复用的内容应下沉到 `ui` 或 `features`
+
 ### 5.9 关于layouts文件夹
 
-- 存放页面（features级别）整体布局类组件
+- 存放页面整体布局类组件
 - 组件必须具有 children props
 
 ### 5.10 关于stores文件夹

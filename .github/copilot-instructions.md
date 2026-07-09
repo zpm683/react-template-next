@@ -29,16 +29,16 @@ applyTo: "**"
 - 优先使用 type，非必要不使用 interface
 - 禁止使用 enum，改用 as const 加类型别名
 - 避免 any，优先 unknown 加类型守卫
-- 公共类型和 API 类型放在 @types 中，按模块声明管理
+- 公共类型和 API 类型放在 @types 中，按普通 TS 模块导出管理
+- Vite 环境变量统一使用 `ENV_` 前缀，并通过 `vite.config.ts` 的 `envPrefix` 显式声明
 
 ## React 与组件
 
 - 使用函数式组件，遵循单一职责和 SOLID 原则
 - 组件内部代码顺序遵循 hooks、handler、effect、render
-- 项目组件层级按 `ui`、`features`、`pages` 三层划分
-- `ui` 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
-- `features` 层允许业务实现，但禁止直接调用 `apis`
-- `pages` 层负责页面级 API 调用、路由入口和 `ui`/`features` 组合
+- ui 层保持纯展示：禁止直接调用 API，禁止直接访问全局状态，禁止承载业务逻辑
+- features 层允许承载业务实现，但禁止直接调用 API；需要通过 hooks、props、状态编排完成交互
+- pages 层负责页面级 API 调用，并组合 ui 和 features
 - 可选 props 在参数解构时提供默认值，不在函数体内兜底
 - JSX 中不要写复杂逻辑，复杂条件提取为 renderXxx 函数
 - 列表渲染必须使用稳定 key；有增删改时禁止使用 index 和随机值
@@ -62,6 +62,5 @@ applyTo: "**"
 ## 禁止项
 
 - 禁止硬编码密钥、Token 等敏感信息，使用 .env 文件管理
-- Vite 环境变量统一使用 VITE\_ 前缀
 - 禁止吞噬异常，异步逻辑优先使用 async/await，并保证错误路径有兜底
 - 禁止随意新增与现有规则冲突的工程约定；如需扩展，优先更新详细规范文件
